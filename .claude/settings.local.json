@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx next *)",
+      "WebFetch(domain:wkroofbuild.com)",
+      "WebFetch(domain:prp-services.uk)",
+      "Bash(npm run *)"
+    ]
+  }
+}

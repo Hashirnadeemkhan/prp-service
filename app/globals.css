@@ -1,0 +1,160 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --prp-navy: #1e3560;
+  --prp-dark: #0d1825;
+  --prp-blue: #2d5486;
+  --prp-gold: #f4b942;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: #fff; color: #1e3560; font-family: "Inter", sans-serif; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #f1f1f1; }
+::-webkit-scrollbar-thumb { background: #1e3560; border-radius: 3px; }
+
+/* ── Buttons ─────────────────────────────────────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #1e3560;
+  color: #fff;
+  padding: 13px 28px;
+  border-radius: 3px;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: background 0.2s, transform 0.15s;
+  border: 2px solid #1e3560;
+}
+.btn-primary:hover { background: #152848; transform: translateY(-1px); }
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: #fff;
+  padding: 13px 28px;
+  border-radius: 3px;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 2px solid rgba(255,255,255,0.65);
+  transition: all 0.2s;
+}
+.btn-outline:hover { background: #fff; color: #1e3560; border-color: #fff; }
+
+.btn-navy {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #1e3560;
+  color: #fff;
+  padding: 12px 32px;
+  border-radius: 3px;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: background 0.2s;
+  border: 2px solid #1e3560;
+}
+.btn-navy:hover { background: #152848; }
+
+.btn-white {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  padding: 12px 28px;
+  border-radius: 3px;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 2px solid rgba(255,255,255,0.45);
+  transition: all 0.2s;
+}
+.btn-white:hover { background: #fff; color: #1e3560; }
+
+/* ── Section label ──────────────────────────────────── */
+.section-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #5b8ac0;
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* ── Section heading ────────────────────────────────── */
+.section-heading {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #1e3560;
+  line-height: 1.15;
+}
+.section-heading.white { color: #fff; }
+
+/* ── Service card ───────────────────────────────────── */
+.service-card { transition: box-shadow 0.3s; }
+.service-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+
+/* ── Nav link ───────────────────────────────────────── */
+.nav-link { position: relative; }
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; left: 0;
+  width: 0; height: 2px;
+  background: #1e3560;
+  transition: width 0.25s;
+}
+.nav-link:hover::after { width: 100%; }
+
+/* ── Icon link (navbar) ─────────────────────────────── */
+.icon-link {
+  width: 34px; height: 34px;
+  border: 1.5px solid #d0d9e8;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: #1e3560;
+  transition: all 0.2s;
+  font-size: 14px;
+}
+.icon-link:hover { background: #1e3560; color: #fff; border-color: #1e3560; }
+
+/* ── Contact circle (filled colored buttons in navbar) ── */
+.contact-circle {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.2s, filter 0.2s;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+}
+.contact-circle:hover { transform: translateY(-2px); filter: brightness(1.1); }
+
+/* ── Social btn (footer) ────────────────────────────── */
+.social-btn {
+  width: 38px; height: 38px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: #8aabcc;
+  transition: background 0.25s, color 0.25s;
+}
+.social-btn:hover { background: #2d5486; color: #fff; }
+
+/* ── Stars ──────────────────────────────────────────── */
+.stars { color: #f4b942; }
