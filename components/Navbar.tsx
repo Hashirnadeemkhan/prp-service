@@ -37,6 +37,9 @@ export default function Navbar() {
           <Link href="/" className="nav-link text-sm font-semibold" style={{ color: "#1e3560" }}>
             Home
           </Link>
+          <Link href="/about" className="nav-link text-sm font-semibold" style={{ color: "#1e3560" }}>
+            About Us
+          </Link>
 
           <div
             className="relative"
@@ -71,6 +74,9 @@ export default function Navbar() {
               </div>
             )}
           </div>
+          <Link href="/blog" className="nav-link text-sm font-semibold" style={{ color: "#1e3560" }}>
+            Blog
+          </Link>
 
           <Link href="/gallery" className="nav-link text-sm font-semibold" style={{ color: "#1e3560" }}>
             Gallery
