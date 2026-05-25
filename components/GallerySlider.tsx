@@ -3,15 +3,18 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 
-const GALLERY_ITEMS = [
-  { image: "/home-hero-1.jpg", bg: "linear-gradient(135deg, #2a4a2a, #4a6e4a)" },
-  { image: "/bg-image-2.jpg", bg: "linear-gradient(135deg, #2a2a3a, #3d3d5e)" },
-  { image: "/home-hero-1.jpg", bg: "linear-gradient(135deg, #4a3d2a, #6e5a3d)" },
-  { image: "/bg-image-2.jpg", bg: "linear-gradient(135deg, #3a4a3a, #5e6e5e)" },
-  { image: "/home-hero-1.jpg", bg: "linear-gradient(135deg, #2a3a4a, #3d5a6e)" },
-  { image: "/bg-image-2.jpg", bg: "linear-gradient(135deg, #1a3a1a, #2a5e2a)" },
-  { image: "/home-hero-1.jpg", bg: "linear-gradient(135deg, #3a2a1a, #5e4a2a)" },
-  { image: "/bg-image-2.jpg", bg: "linear-gradient(135deg, #2a3a4a, #4a5a6e)" },
+const SLIDES = [
+  "/001.jpg",        // Closeboard fencing
+  "/004.jpg",        // Block paving driveway
+  "/005.jpg",        // Slate roof
+  "/007.jpg",        // Garden & landscaping
+  "/008.jpg",        // Double wooden gates
+  "/home-hero-1.jpg",// Patio with fencing
+  "/002.jpg",        // Narrow passage gate
+  "/006.jpg",        // Tarmac driveway
+  "/003.jpg",        // Decorative diamond-trellis fence
+  "/bg-image-2.jpg", // Roofing worker
+  "/009.jpg",        // Fence panel construction
 ];
 
 export default function GallerySlider() {
@@ -19,7 +22,7 @@ export default function GallerySlider() {
     <div className="gallery-slider-wrap">
       <Swiper
         modules={[Autoplay]}
-        spaceBetween={8}
+        spaceBetween={10}
         slidesPerView={2}
         loop={true}
         speed={3500}
@@ -35,13 +38,11 @@ export default function GallerySlider() {
           1024: { slidesPerView: 5, spaceBetween: 10 },
         }}
         className="gallery-swiper">
-        {GALLERY_ITEMS.map((item, i) => (
+        {SLIDES.map((src, i) => (
           <SwiperSlide key={i}>
             <div
-              className="gallery-slide h-40 md:h-44 w-full"
-              style={{
-                background: `url('${item.image}') center/cover no-repeat, ${item.bg}`,
-              }}
+              className="gallery-slide h-44 w-full"
+              style={{ backgroundImage: `url('${src}')`, backgroundSize: "cover", backgroundPosition: "center" }}
             />
           </SwiperSlide>
         ))}

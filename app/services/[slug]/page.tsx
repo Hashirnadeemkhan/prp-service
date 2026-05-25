@@ -105,7 +105,9 @@ export default function ServicePage({ params }: Props) {
       <section
         className="py-24 px-4 text-center"
         style={{
-          background: `linear-gradient(rgba(8,18,38,0.78), rgba(8,18,38,0.78)), url('${params.slug === "roofing-repairs" ? "/bg-image-2.jpg" : "/home-hero-1.jpg"}') center/cover no-repeat, ${service.gradient}`,
+          background: `linear-gradient(rgba(8,18,38,0.78), rgba(8,18,38,0.78)), url('${
+            { fencing: "/001.jpg", "roofing-repairs": "/005.jpg", "patios-driveways": "/004.jpg", "landscaping-tree-surgery": "/007.jpg" }[params.slug] ?? "/home-hero-1.jpg"
+          }') center/cover no-repeat, ${service.gradient}`,
         }}>
         <div className="max-w-3xl mx-auto">
           <span className="section-label">OUR SERVICES</span>

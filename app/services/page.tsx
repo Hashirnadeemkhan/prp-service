@@ -11,13 +11,15 @@ const SERVICES = [
   {
     name: "Fencing",
     slug: "fencing",
-    gradient: "linear-gradient(160deg, #1e3d1e 0%, #2d5e2d 100%)",
+    image: "/001.jpg",
+    gradient: "linear-gradient(160deg, #2a3d1e 0%, #3d5e2d 100%)",
     description:
       "We supply and fit all types of fencing including closeboard, panel, post and rail, and ornamental fencing for domestic and commercial properties across Worcestershire.",
   },
   {
     name: "Roofing & Repairs",
     slug: "roofing-repairs",
+    image: "/005.jpg",
     gradient: "linear-gradient(160deg, #1e1e3d 0%, #2d2d5e 100%)",
     description:
       "From emergency roof repairs to complete reroofing, our experienced team handles all types of roofing including tile, slate, and flat roofs.",
@@ -25,6 +27,7 @@ const SERVICES = [
   {
     name: "Patios & Driveways",
     slug: "patios-driveways",
+    image: "/004.jpg",
     gradient: "linear-gradient(160deg, #3d2a1a 0%, #5e4a2d 100%)",
     description:
       "Transform your outdoor space with a beautiful new patio or driveway. We work with block paving, natural stone, concrete, and tarmac.",
@@ -32,6 +35,7 @@ const SERVICES = [
   {
     name: "Landscaping & Tree Surgery",
     slug: "landscaping-tree-surgery",
+    image: "/007.jpg",
     gradient: "linear-gradient(160deg, #1a3d1a 0%, #2a5e2a 100%)",
     description:
       "Complete garden makeovers, lawn care, planting, and professional tree surgery including felling, pruning, and stump removal.",
@@ -75,7 +79,7 @@ export default function ServicesPage() {
                 <div
                   className="h-56 flex items-end p-5"
                   style={{
-                    background: `linear-gradient(to bottom, rgba(0,0,0,0.15) 40%, rgba(0,0,0,0.7) 100%), url('${service.slug === "roofing-repairs" ? "/bg-image-2.jpg" : "/home-hero-1.jpg"}') center/cover no-repeat, ${service.gradient}`,
+                    background: `linear-gradient(to bottom, rgba(0,0,0,0.15) 40%, rgba(0,0,0,0.68) 100%), url('${service.image}') center/cover no-repeat, ${service.gradient}`,
                   }}>
                   <h2 className="text-white font-bold text-xl">{service.name}</h2>
                 </div>
