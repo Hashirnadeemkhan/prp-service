@@ -1,4 +1,13 @@
 import Link from "next/link";
+import {
+  FadeInUp,
+  FadeInLeft,
+  FadeInRight,
+  Stagger,
+  StaggerItem,
+  HeroFadeUp,
+} from "@/components/animations/Motion";
+import GallerySlider from "@/components/GallerySlider";
 
 const SERVICES = [
   {
@@ -40,14 +49,6 @@ const REVIEWS = [
   },
 ];
 
-const GALLERY_ITEMS = [
-  { image: "/home-hero-1.jpg", bg: "linear-gradient(135deg, #2a4a2a, #4a6e4a)" },
-  { image: "/bg-image-2.jpg", bg: "linear-gradient(135deg, #2a2a3a, #3d3d5e)" },
-  { image: "/home-hero-1.jpg", bg: "linear-gradient(135deg, #4a3d2a, #6e5a3d)" },
-  { image: "/bg-image-2.jpg", bg: "linear-gradient(135deg, #3a4a3a, #5e6e5e)" },
-  { image: "/home-hero-1.jpg", bg: "linear-gradient(135deg, #2a3a4a, #3d5a6e)" },
-];
-
 function Stars({ count }: { count: number }) {
   return (
     <div className="stars flex gap-0.5 mb-3">
@@ -65,41 +66,49 @@ export default function HomeContent() {
     <>
       {/* ── Hero ─────────────────────────────────────────────── */}
       <section
-        className="relative flex items-center"
-        style={{
-          minHeight: "85vh",
-          background:
-            "linear-gradient(rgba(8,18,38,0.55), rgba(8,18,38,0.55)), url('/home-hero-1.jpg') center/cover no-repeat",
-          backgroundColor: "#0f1e3d",
-        }}>
-        <div className="max-w-6xl mx-auto px-6 py-24 w-full">
+        className="relative flex items-center overflow-hidden"
+        style={{ minHeight: "85vh", backgroundColor: "#0f1e3d" }}>
+        {/* Ken Burns background */}
+        <div
+          className="hero-bg"
+          style={{ backgroundImage: "url('/home-hero-1.jpg')" }}
+        />
+        <div className="hero-overlay" />
+
+        <div className="relative z-10 max-w-6xl mx-auto px-6 py-24 w-full">
           <div className="max-w-xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-5">
-              Complete Property Care
-              <br />
-              in Worcestershire
-            </h1>
-            <p
-              className="border-l-4 pl-4 text-gray-300 mb-8 text-base leading-relaxed max-w-md"
-              style={{ borderColor: "#f4b942" }}>
-              From fencing to roofing and everything in between — we keep your property looking
-              its best, year-round.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <Link href="/contact" className="btn-primary">
-                Get a Quote
-              </Link>
-              <Link href="#services" className="btn-outline">
-                Learn More
-              </Link>
-            </div>
+            <HeroFadeUp delay={0.1}>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-5">
+                Complete Property Care
+                <br />
+                in Worcestershire
+              </h1>
+            </HeroFadeUp>
+            <HeroFadeUp delay={0.3}>
+              <p
+                className="border-l-4 pl-4 text-gray-300 mb-8 text-base leading-relaxed max-w-md"
+                style={{ borderColor: "#f4b942" }}>
+                From fencing to roofing and everything in between &mdash; we keep your property
+                looking its best, year-round.
+              </p>
+            </HeroFadeUp>
+            <HeroFadeUp delay={0.5}>
+              <div className="flex flex-wrap gap-3">
+                <Link href="/contact" className="btn-primary">
+                  Get a Quote
+                </Link>
+                <Link href="#services" className="btn-outline">
+                  Learn More
+                </Link>
+              </div>
+            </HeroFadeUp>
           </div>
         </div>
       </section>
 
       {/* ── Phone Banner ─────────────────────────────────────── */}
-      <div className="py-4 px-4 text-center" style={{ backgroundColor: "#1a3a6e" }}>
-        <p className="text-white text-sm md:text-base font-medium">
+      <div className="phone-banner py-4 px-4 text-center" style={{ backgroundColor: "#1a3a6e" }}>
+        <p className="text-white text-sm md:text-base font-medium relative z-10">
           Call us today on{" "}
           <a href="tel:07593728481" className="font-extrabold hover:underline">
             07593 728 481
@@ -111,54 +120,69 @@ export default function HomeContent() {
       <section id="services" className="py-16 px-4 bg-white">
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-8 mb-10">
-            <div>
+            <FadeInLeft>
               <span className="section-label">OUR SERVICES</span>
               <h2 className="section-heading">What we do</h2>
-            </div>
-            <div className="flex items-center">
-              <p className="text-gray-600 text-sm leading-relaxed">
-                We offer a full range of exterior property maintenance services for both domestic
-                and commercial properties.
-              </p>
-            </div>
+            </FadeInLeft>
+            <FadeInRight>
+              <div className="flex items-center h-full">
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  We offer a full range of exterior property maintenance services for both
+                  domestic and commercial properties.
+                </p>
+              </div>
+            </FadeInRight>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <Stagger className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4" staggerDelay={0.12}>
             {SERVICES.map((service) => (
-              <div key={service.slug} className="service-card overflow-hidden border border-gray-100">
-                <div
-                  className="relative h-52 flex items-end"
-                  style={{
-                    background: `linear-gradient(to bottom, rgba(0,0,0,0.15) 40%, rgba(0,0,0,0.72) 100%), url('${service.image}') center/cover no-repeat, ${service.gradient}`,
-                  }}>
-                  <div className="p-4">
-                    <h3 className="text-white font-bold text-base">{service.name}</h3>
+              <StaggerItem key={service.slug}>
+                <Link
+                  href={`/services/${service.slug}`}
+                  className="service-card block overflow-hidden border border-gray-100 cursor-pointer h-full">
+                  <div className="relative h-52 overflow-hidden">
+                    <div
+                      className="service-card-image absolute inset-0"
+                      style={{
+                        background: `url('${service.image}') center/cover no-repeat, ${service.gradient}`,
+                      }}
+                    />
+                    <div
+                      className="absolute inset-0"
+                      style={{
+                        background:
+                          "linear-gradient(to bottom, rgba(0,0,0,0.15) 40%, rgba(0,0,0,0.72) 100%)",
+                      }}
+                    />
+                    <div className="relative h-full flex items-end p-4">
+                      <h3 className="text-white font-bold text-base">{service.name}</h3>
+                    </div>
                   </div>
-                </div>
-                <div className="p-3 bg-white border-l border-r border-b border-gray-100">
-                  <Link
-                    href={`/services/${service.slug}`}
-                    className="text-sm font-semibold hover:underline"
-                    style={{ color: "#2d5486" }}>
-                    Learn more →
-                  </Link>
-                </div>
-              </div>
+                  <div className="p-3 bg-white">
+                    <span
+                      className="service-learn-more text-sm font-semibold"
+                      style={{ color: "#2d5486" }}>
+                      Learn more →
+                    </span>
+                  </div>
+                </Link>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
 
       {/* ── About ────────────────────────────────────────────── */}
       <section
-        className="py-20 px-4"
+        className="py-20 px-4 relative overflow-hidden"
         style={{
           background:
             "linear-gradient(rgba(8,18,38,0.78), rgba(8,18,38,0.78)), url('/bg-image-2.jpg') center/cover no-repeat",
           backgroundColor: "#0d1e38",
+          backgroundAttachment: "fixed",
         }}>
-        <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16">
-          <div>
+        <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 relative z-10">
+          <FadeInLeft>
             <span className="section-label">WHO WE ARE</span>
             <h2 className="section-heading white mb-6">About us</h2>
             <div className="space-y-4 text-sm leading-relaxed" style={{ color: "#b0c4d8" }}>
@@ -177,10 +201,10 @@ export default function HomeContent() {
               </p>
               <p>
                 We work with care, attention to detail, and a commitment to getting the job done
-                right — the first time, every time.
+                right &mdash; the first time, every time.
               </p>
             </div>
-          </div>
+          </FadeInLeft>
         </div>
       </section>
 
@@ -188,35 +212,33 @@ export default function HomeContent() {
       <section className="py-16 px-4 bg-white">
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-8 mb-10">
-            <div>
+            <FadeInLeft>
               <span className="section-label">VIEW OUR GALLERY</span>
               <h2 className="section-heading">Our Latest Work</h2>
-            </div>
-            <div className="flex items-center">
-              <p className="text-gray-600 text-sm leading-relaxed">
-                Have a look at some of our recently completed jobs from around Worcester and the
-                surrounding areas in Worcestershire.
-              </p>
-            </div>
+            </FadeInLeft>
+            <FadeInRight>
+              <div className="flex items-center h-full">
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  Have a look at some of our recently completed jobs from around Worcester and the
+                  surrounding areas in Worcestershire.
+                </p>
+              </div>
+            </FadeInRight>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 mb-8">
-            {GALLERY_ITEMS.map((item, i) => (
-              <div
-                key={i}
-                className="h-40 overflow-hidden"
-                style={{
-                  background: `url('${item.image}') center/cover no-repeat, ${item.bg}`,
-                }}
-              />
-            ))}
-          </div>
+          <FadeInUp>
+            <div className="mb-8">
+              <GallerySlider />
+            </div>
+          </FadeInUp>
 
-          <div className="text-center">
-            <Link href="/gallery" className="btn-navy">
-              View Gallery
-            </Link>
-          </div>
+          <FadeInUp delay={0.2}>
+            <div className="text-center">
+              <Link href="/gallery" className="btn-navy">
+                View Gallery
+              </Link>
+            </div>
+          </FadeInUp>
         </div>
       </section>
 
@@ -224,36 +246,43 @@ export default function HomeContent() {
       <section className="py-16 px-4" style={{ backgroundColor: "#0d1e38" }}>
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-8 mb-8">
-            <div>
+            <FadeInLeft>
               <span className="section-label">WHERE WE WORK</span>
               <h2 className="section-heading white">Areas we cover</h2>
-            </div>
-            <div className="flex items-center">
-              <p className="text-sm leading-relaxed" style={{ color: "#b0c4d8" }}>
-                We&apos;re based in Worcester and work throughout the surrounding areas in
-                Worcestershire. If you&apos;re unsure if we cover your location, please{" "}
-                <Link href="/contact" className="underline hover:text-white" style={{ color: "#7ab2d8" }}>
-                  get in touch.
-                </Link>
-              </p>
-            </div>
+            </FadeInLeft>
+            <FadeInRight>
+              <div className="flex items-center h-full">
+                <p className="text-sm leading-relaxed" style={{ color: "#b0c4d8" }}>
+                  We&apos;re based in Worcester and work throughout the surrounding areas in
+                  Worcestershire. If you&apos;re unsure if we cover your location, please{" "}
+                  <Link
+                    href="/contact"
+                    className="underline hover:text-white transition-colors"
+                    style={{ color: "#7ab2d8" }}>
+                    get in touch.
+                  </Link>
+                </p>
+              </div>
+            </FadeInRight>
           </div>
 
-          <div className="rounded overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.1)" }}>
-            <iframe
-              src="https://www.openstreetmap.org/export/embed.html?bbox=-2.7%2C51.9%2C-1.7%2C52.5&layer=mapnik&marker=52.1920%2C-2.2200"
-              width="100%"
-              height="400"
-              style={{ border: 0, display: "block" }}
-              loading="lazy"
-              title="Areas we cover — Worcestershire"
-            />
-            <p
-              className="text-right text-xs px-3 py-1.5"
-              style={{ backgroundColor: "#f5f5f5", color: "#666" }}>
-              Map data © Leaflet &amp; OpenStreetMap contributors
-            </p>
-          </div>
+          <FadeInUp>
+            <div className="rounded overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.1)" }}>
+              <iframe
+                src="https://www.openstreetmap.org/export/embed.html?bbox=-2.7%2C51.9%2C-1.7%2C52.5&layer=mapnik&marker=52.1920%2C-2.2200"
+                width="100%"
+                height="400"
+                style={{ border: 0, display: "block" }}
+                loading="lazy"
+                title="Areas we cover — Worcestershire"
+              />
+              <p
+                className="text-right text-xs px-3 py-1.5"
+                style={{ backgroundColor: "#f5f5f5", color: "#666" }}>
+                Map data © Leaflet &amp; OpenStreetMap contributors
+              </p>
+            </div>
+          </FadeInUp>
         </div>
       </section>
 
@@ -261,52 +290,57 @@ export default function HomeContent() {
       <section className="py-16 px-4 bg-white">
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-8 mb-10">
-            <div>
+            <FadeInLeft>
               <span className="section-label">OUR REVIEWS</span>
               <h2 className="section-heading">What our customers say</h2>
-            </div>
-            <div className="flex items-center">
-              <p className="text-gray-600 text-sm leading-relaxed">
-                We take great pride in our work and providing exceptional service. Here&apos;s a
-                small sample of the great feedback we&apos;ve received from our customers:
-              </p>
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-5 mb-8">
-            {REVIEWS.map((review) => (
-              <div
-                key={review.name}
-                className="border border-gray-100 rounded-sm p-6 shadow-sm">
-                <Stars count={review.stars} />
-                <p className="text-gray-700 text-sm leading-relaxed mb-4">
-                  &ldquo;{review.text}&rdquo;
-                </p>
-                <p className="text-sm font-bold" style={{ color: "#1e3560" }}>
-                  — {review.name}
+            </FadeInLeft>
+            <FadeInRight>
+              <div className="flex items-center h-full">
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  We take great pride in our work and providing exceptional service. Here&apos;s a
+                  small sample of the great feedback we&apos;ve received from our customers:
                 </p>
               </div>
-            ))}
+            </FadeInRight>
           </div>
 
-          <div className="text-center">
-            <Link href="/reviews" className="btn-navy">
-              Read All Reviews
-            </Link>
-          </div>
+          <Stagger className="grid md:grid-cols-2 gap-5 mb-8" staggerDelay={0.15}>
+            {REVIEWS.map((review) => (
+              <StaggerItem key={review.name}>
+                <div className="review-card border border-gray-100 rounded-sm p-6 shadow-sm h-full">
+                  <Stars count={review.stars} />
+                  <p className="text-gray-700 text-sm leading-relaxed mb-4">
+                    &ldquo;{review.text}&rdquo;
+                  </p>
+                  <p className="text-sm font-bold" style={{ color: "#1e3560" }}>
+                    — {review.name}
+                  </p>
+                </div>
+              </StaggerItem>
+            ))}
+          </Stagger>
+
+          <FadeInUp delay={0.1}>
+            <div className="text-center">
+              <Link href="/reviews" className="btn-navy">
+                Read All Reviews
+              </Link>
+            </div>
+          </FadeInUp>
         </div>
       </section>
 
       {/* ── Contact CTA ──────────────────────────────────────── */}
       <section
-        className="py-20 px-4"
+        className="py-20 px-4 relative"
         style={{
           background:
             "linear-gradient(rgba(8,18,38,0.82), rgba(8,18,38,0.82)), url('/bg-image-2.jpg') center/cover no-repeat",
           backgroundColor: "#0d1e38",
+          backgroundAttachment: "fixed",
         }}>
-        <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
-          <div>
+        <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center relative z-10">
+          <FadeInLeft>
             <span className="section-label">GET IN TOUCH TODAY</span>
             <h2 className="section-heading white mb-4">
               Let&apos;s transform your property
@@ -317,11 +351,7 @@ export default function HomeContent() {
             </p>
             <div className="flex flex-wrap gap-3">
               <Link href="/contact" className="btn-white">
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor">
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -332,11 +362,7 @@ export default function HomeContent() {
                 Get a Quote
               </Link>
               <a href="tel:07593728481" className="btn-white">
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor">
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -347,7 +373,7 @@ export default function HomeContent() {
                 Call Us
               </a>
             </div>
-          </div>
+          </FadeInLeft>
         </div>
       </section>
     </>

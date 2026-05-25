@@ -54,15 +54,15 @@ export default function GalleryPage() {
             {GALLERY_ITEMS.map((item, i) => (
               <div
                 key={i}
-                className="group relative overflow-hidden"
+                className="gallery-card group relative"
                 style={{ aspectRatio: "4/3" }}>
                 <div
-                  className="absolute inset-0 transition-transform duration-500 group-hover:scale-105"
+                  className="gallery-card-image absolute inset-0"
                   style={{
                     background: `url('${i % 2 === 0 ? "/home-hero-1.jpg" : "/bg-image-2.jpg"}') center/cover no-repeat, ${item.bg}`,
                   }}
                 />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300" />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/45 transition-colors duration-300" />
                 <div className="absolute bottom-0 left-0 right-0 p-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
                   <p className="text-white text-xs font-bold">{item.label}</p>
                   <Link

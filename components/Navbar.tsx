@@ -48,7 +48,7 @@ export default function Navbar() {
               Services <ChevronDown className="w-3.5 h-3.5" />
             </button>
             {servicesOpen && (
-              <div className="absolute top-full left-0 bg-white shadow-xl border border-gray-100 min-w-[230px] py-2 z-50">
+              <div className="nav-dropdown absolute top-full left-0 bg-white shadow-xl border border-gray-100 min-w-[230px] py-2 z-50">
                 {SERVICES.map((s) => (
                   <Link
                     key={s.slug}

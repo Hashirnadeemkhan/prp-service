@@ -7,14 +7,8 @@ export default function FloatingWhatsApp() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"
-      className="fixed bottom-5 right-5 z-50 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-transform duration-200"
-      style={{
-        width: "54px",
-        height: "54px",
-        backgroundColor: "#25D366",
-        boxShadow: "0 4px 14px rgba(0,0,0,0.25)",
-      }}>
-      <FaWhatsapp size={30} color="white" />
+      className="wa-fab">
+      <FaWhatsapp size={30} color="white" style={{ position: "relative", zIndex: 1 }} />
     </a>
   );
 }

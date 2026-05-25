@@ -4,7 +4,8 @@
       "Bash(npx next *)",
       "WebFetch(domain:wkroofbuild.com)",
       "WebFetch(domain:prp-services.uk)",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "Bash(npx tsc *)"
     ]
   }
 }
