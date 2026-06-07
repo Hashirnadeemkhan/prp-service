@@ -6,10 +6,10 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import { FaPhoneAlt, FaWhatsapp, FaEnvelope } from "react-icons/fa";
 
 const SERVICES = [
-  { name: "Fencing", slug: "fencing" },
-  { name: "Roofing & Repairs", slug: "roofing-repairs" },
-  { name: "Patios & Driveways", slug: "patios-driveways" },
-  { name: "Landscaping & Tree Surgery", slug: "landscaping-tree-surgery" },
+  { name: "Fencing", slug: "fencing-services" },
+  { name: "Roofing & Repairs", slug: "roofing-services" },
+  { name: "Patios & Driveways", slug: "driveways-patios-worcester" },
+  { name: "Landscaping & Tree Surgery", slug: "landscaping-services" },
 ];
 
 export default function Navbar() {

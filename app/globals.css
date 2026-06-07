@@ -366,6 +366,58 @@ body { background: #fff; color: #1e3560; font-family: "Inter", sans-serif; }
 }
 .gallery-swiper:active .gallery-slide { cursor: grabbing; }
 
+/* ── Blog content (rendered Quill HTML) ─────────────── */
+.blog-content { color: #374151; font-size: 16px; line-height: 1.9; }
+.blog-content h1,
+.blog-content h2 {
+  color: #1e3560;
+  font-weight: 800;
+  font-size: 1.6rem;
+  line-height: 1.25;
+  margin: 2rem 0 1rem;
+}
+.blog-content h3 {
+  color: #1e3560;
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin: 1.6rem 0 0.75rem;
+}
+.blog-content p { margin: 0 0 1.1rem; }
+.blog-content a { color: #2d5486; text-decoration: underline; }
+.blog-content a:hover { color: #1e3560; }
+.blog-content ul,
+.blog-content ol { margin: 0 0 1.1rem 1.4rem; }
+.blog-content ul { list-style: disc; }
+.blog-content ol { list-style: decimal; }
+.blog-content li { margin-bottom: 0.4rem; }
+.blog-content blockquote {
+  border-left: 4px solid #2d5486;
+  background: #f0f5fb;
+  padding: 0.85rem 1.2rem;
+  margin: 1.4rem 0;
+  color: #374151;
+  font-style: italic;
+}
+.blog-content img { border-radius: 8px; margin: 1.4rem 0; max-width: 100%; height: auto; }
+.blog-content strong { color: #1e3560; }
+
+/* ── Quill editor (admin) ───────────────────────────── */
+.prp-quill .ql-toolbar {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-color: #e5e7eb;
+}
+.prp-quill .ql-container {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-color: #e5e7eb;
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  min-height: 280px;
+}
+.prp-quill .ql-editor { min-height: 280px; }
+.prp-quill .ql-editor.ql-blank::before { color: #9ca3af; font-style: normal; }
+
 /* ── Respect reduced motion ─────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

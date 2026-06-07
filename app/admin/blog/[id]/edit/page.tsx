@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import Link from "next/link";
 import { UploadButton } from "@/lib/uploadthing";
+import RichTextEditor from "@/components/RichTextEditor";
 
 function slugify(text: string) {
   return text.toLowerCase().replace(/[^a-z0-9\s-]/g, "").trim().replace(/\s+/g, "-");
@@ -32,6 +33,11 @@ export default function EditBlogPost() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const cleaned = form.content.replace(/<(.|\n)*?>/g, "").trim();
+    if (!cleaned) {
+      setError("Blog content khali nahi ho sakta.");
+      return;
+    }
     setSaving(true);
     setError("");
     try {
@@ -61,7 +67,7 @@ export default function EditBlogPost() {
           </svg>
         </Link>
         <div>
-          <h1 className="text-2xl font-extrabold" style={{ color: "#1B2A41" }}>Edit Post</h1>
+          <h1 className="text-2xl font-extrabold" style={{ color: "#1e3560" }}>Edit Post</h1>
           <p className="text-sm text-gray-500">Update the blog post details below.</p>
         </div>
       </div>
@@ -70,33 +76,33 @@ export default function EditBlogPost() {
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-          <h2 className="font-bold text-sm mb-4" style={{ color: "#1B2A41" }}>Post Details</h2>
+          <h2 className="font-bold text-sm mb-4" style={{ color: "#1e3560" }}>Post Details</h2>
           <div className="space-y-4">
             <div>
               <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5">Title *</label>
               <input type="text" value={form.title}
                 onChange={(e) => { set("title", e.target.value); set("slug", slugify(e.target.value)); }}
-                required className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-orange-400" />
+                required className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[#2d5486]" />
             </div>
             <div>
               <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5">Slug (URL) *</label>
               <div className="flex">
                 <span className="px-3 py-3 bg-gray-100 border border-r-0 border-gray-200 rounded-l-lg text-xs text-gray-500">/blog/</span>
                 <input type="text" value={form.slug} onChange={(e) => set("slug", e.target.value)} required
-                  className="flex-1 px-4 py-3 border border-gray-200 rounded-r-lg text-sm focus:outline-none focus:border-orange-400" />
+                  className="flex-1 px-4 py-3 border border-gray-200 rounded-r-lg text-sm focus:outline-none focus:border-[#2d5486]" />
               </div>
             </div>
             <div>
               <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5">Short Excerpt</label>
               <textarea value={form.excerpt} onChange={(e) => set("excerpt", e.target.value)} rows={2}
-                className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-orange-400 resize-none" />
+                className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[#2d5486] resize-none" />
             </div>
           </div>
         </div>
 
         {/* Cover Image */}
         <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-          <h2 className="font-bold text-sm mb-4" style={{ color: "#1B2A41" }}>Cover Image</h2>
+          <h2 className="font-bold text-sm mb-4" style={{ color: "#1e3560" }}>Cover Image</h2>
 
           {form.coverImage ? (
             <div className="space-y-3">
@@ -127,7 +133,7 @@ export default function EditBlogPost() {
                 }}
                 appearance={{
                   button: {
-                    backgroundColor: "#FF5A1A",
+                    backgroundColor: "#2d5486",
                     color: "white",
                     fontWeight: "bold",
                     fontSize: "13px",
@@ -143,16 +149,15 @@ export default function EditBlogPost() {
         </div>
 
         <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-          <h2 className="font-bold text-sm mb-4" style={{ color: "#1B2A41" }}>Blog Content *</h2>
-          <textarea value={form.content} onChange={(e) => set("content", e.target.value)} rows={16} required
-            className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-orange-400 resize-y" />
+          <h2 className="font-bold text-sm mb-4" style={{ color: "#1e3560" }}>Blog Content *</h2>
+          <RichTextEditor value={form.content} onChange={(html) => set("content", html)} />
         </div>
 
         <div className="flex items-center justify-end gap-4">
           <Link href="/admin/blog" className="px-6 py-3 rounded-lg text-sm font-semibold text-gray-600 bg-white border border-gray-200 hover:bg-gray-50">Cancel</Link>
           <button type="submit" disabled={saving || uploading}
             className="px-8 py-3 rounded-lg text-sm font-bold text-white disabled:opacity-60"
-            style={{ backgroundColor: "#FF5A1A" }}>
+            style={{ backgroundColor: "#2d5486" }}>
             {saving ? "Saving…" : "Save Changes"}
           </button>
         </div>

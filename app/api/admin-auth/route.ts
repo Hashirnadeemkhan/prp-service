@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const ADMIN_PASSWORD = "WKroof2024";
-const AUTH_TOKEN = "wk-admin-ok-2024";
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD ?? "prpservice123";
+const AUTH_TOKEN = "prp-admin-ok-2024";
 
 export async function POST(req: NextRequest) {
   const { password } = await req.json();

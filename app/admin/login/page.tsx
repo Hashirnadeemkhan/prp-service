@@ -30,16 +30,16 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center" style={{ background: "linear-gradient(135deg,#131F31,#1B2A41)" }}>
+    <div className="min-h-screen flex items-center justify-center" style={{ background: "linear-gradient(135deg,#0d1825,#1e3560)" }}>
       <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-sm">
         <div className="text-center mb-6">
-          <div className="w-12 h-12 rounded-xl mx-auto flex items-center justify-center mb-3" style={{ backgroundColor: "#FF5A1A" }}>
+          <div className="w-12 h-12 rounded-xl mx-auto flex items-center justify-center mb-3" style={{ backgroundColor: "#1e3560" }}>
             <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
             </svg>
           </div>
-          <h1 className="text-xl font-extrabold" style={{ color: "#1B2A41" }}>Admin Login</h1>
-          <p className="text-sm text-gray-400 mt-1">WK Roofbuild</p>
+          <h1 className="text-xl font-extrabold" style={{ color: "#1e3560" }}>Admin Login</h1>
+          <p className="text-sm text-gray-400 mt-1">PRP Services</p>
         </div>
 
         {error && (
@@ -58,14 +58,14 @@ export default function AdminLogin() {
               placeholder="••••••••"
               required
               autoFocus
-              className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400"
+              className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[#2d5486] focus:ring-1 focus:ring-[#2d5486]"
             />
           </div>
           <button
             type="submit"
             disabled={loading}
             className="w-full py-3 rounded-lg text-white font-bold text-sm transition-colors disabled:opacity-60"
-            style={{ backgroundColor: "#FF5A1A" }}
+            style={{ backgroundColor: "#1e3560" }}
           >
             {loading ? "Wait…" : "Login"}
           </button>

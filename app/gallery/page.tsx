@@ -8,17 +8,17 @@ export const metadata: Metadata = {
 };
 
 const GALLERY_ITEMS = [
-  { src: "/001.jpg",         label: "Closeboard Fence",            category: "Fencing",            slug: "fencing" },
-  { src: "/002.jpg",         label: "Wooden Gate Installation",    category: "Fencing",            slug: "fencing" },
-  { src: "/003.jpg",         label: "Decorative Trellis Fence",    category: "Fencing",            slug: "fencing" },
-  { src: "/008.jpg",         label: "Double Wooden Gates",         category: "Fencing",            slug: "fencing" },
-  { src: "/009.jpg",         label: "Fence Panel Construction",    category: "Fencing",            slug: "fencing" },
-  { src: "/home-hero-1.jpg", label: "Natural Stone Patio",         category: "Patios & Driveways", slug: "patios-driveways" },
-  { src: "/004.jpg",         label: "Block Paving Driveway",       category: "Patios & Driveways", slug: "patios-driveways" },
-  { src: "/006.jpg",         label: "Tarmac Driveway",             category: "Patios & Driveways", slug: "patios-driveways" },
-  { src: "/005.jpg",         label: "New Slate Roof",              category: "Roofing & Repairs",  slug: "roofing-repairs" },
-  { src: "/bg-image-2.jpg",  label: "Roof Repair & Maintenance",   category: "Roofing & Repairs",  slug: "roofing-repairs" },
-  { src: "/007.jpg",         label: "Garden & Lawn Landscaping",   category: "Landscaping",        slug: "landscaping-tree-surgery" },
+  { src: "/001.jpg",         label: "Closeboard Fence",            category: "Fencing",            slug: "fencing-services" },
+  { src: "/002.jpg",         label: "Wooden Gate Installation",    category: "Fencing",            slug: "fencing-services" },
+  { src: "/003.jpg",         label: "Decorative Trellis Fence",    category: "Fencing",            slug: "fencing-services" },
+  { src: "/008.jpg",         label: "Double Wooden Gates",         category: "Fencing",            slug: "fencing-services" },
+  { src: "/009.jpg",         label: "Fence Panel Construction",    category: "Fencing",            slug: "fencing-services" },
+  { src: "/home-hero-1.jpg", label: "Natural Stone Patio",         category: "Patios & Driveways", slug: "driveways-patios-worcester" },
+  { src: "/004.jpg",         label: "Block Paving Driveway",       category: "Patios & Driveways", slug: "driveways-patios-worcester" },
+  { src: "/006.jpg",         label: "Tarmac Driveway",             category: "Patios & Driveways", slug: "driveways-patios-worcester" },
+  { src: "/005.jpg",         label: "New Slate Roof",              category: "Roofing & Repairs",  slug: "roofing-services" },
+  { src: "/bg-image-2.jpg",  label: "Roof Repair & Maintenance",   category: "Roofing & Repairs",  slug: "roofing-services" },
+  { src: "/007.jpg",         label: "Garden & Lawn Landscaping",   category: "Landscaping",        slug: "landscaping-services" },
 ];
 
 export default function GalleryPage() {

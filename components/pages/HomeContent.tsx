@@ -12,25 +12,25 @@ import GallerySlider from "@/components/GallerySlider";
 const SERVICES = [
   {
     name: "Fencing",
-    slug: "fencing",
+    slug: "fencing-services",
     image: "/001.jpg",
     gradient: "linear-gradient(160deg, #2a3d1e 0%, #3d5e2d 100%)",
   },
   {
     name: "Roofing & Repairs",
-    slug: "roofing-repairs",
+    slug: "roofing-services",
     image: "/005.jpg",
     gradient: "linear-gradient(160deg, #1e1e3d 0%, #2d2d5e 100%)",
   },
   {
     name: "Patios & Driveways",
-    slug: "patios-driveways",
+    slug: "driveways-patios-worcester",
     image: "/004.jpg",
     gradient: "linear-gradient(160deg, #3d2a1a 0%, #5e4a2d 100%)",
   },
   {
     name: "Landscaping & Tree Surgery",
-    slug: "landscaping-tree-surgery",
+    slug: "landscaping-services",
     image: "/007.jpg",
     gradient: "linear-gradient(160deg, #1a3d1a 0%, #2a5e2a 100%)",
   },

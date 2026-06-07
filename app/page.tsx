@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import HomeContent from "@/components/pages/HomeContent";
 
 export const metadata: Metadata = {
-  title: "PRP Services | Complete Property Care in Worcestershire",
+  title: "Fencing, Roofing & Landscaping Services Worcester | PRP Services",
   description:
-    "PRP Services — complete property care in Worcestershire. Fencing, roofing, patios, driveways, landscaping & tree surgery. Over 10 years experience. Call 07593 728 481.",
+    "Professional fencing, roofing, landscaping, patios & driveway services in Worcester. Reliable, affordable & local experts.",
   alternates: { canonical: "https://prp-services.uk" },
 };
 

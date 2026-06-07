@@ -6,14 +6,20 @@ const SERVICES: Record<
   string,
   {
     name: string;
+    metaTitle: string;
+    metaDescription: string;
     description: string;
     gradient: string;
     features: string[];
     callout: string;
   }
 > = {
-  fencing: {
+  "fencing-services": {
     name: "Fencing",
+    metaTitle:
+      "Fencing Services Worcester | Fence Installation & Repair Experts | PRP Services",
+    metaDescription:
+      "Looking for fencing services in Worcester? We offer fence installation, repair, and replacement at affordable prices. Trusted local fencing contractors.",
     gradient: "linear-gradient(160deg, #1e3d1e 0%, #2d5e2d 100%)",
     description:
       "We supply and fit all types of fencing for domestic and commercial properties across Worcestershire. Whether you need a new garden fence, security fencing, or agricultural fencing, our experienced team will deliver a high-quality result that lasts.",
@@ -28,8 +34,12 @@ const SERVICES: Record<
       "Gate installation and repair",
     ],
   },
-  "roofing-repairs": {
+  "roofing-services": {
     name: "Roofing & Repairs",
+    metaTitle:
+      "Roofing Services Worcester | Roof Repairs & Installation Experts | PRP Services",
+    metaDescription:
+      "Expert roofing services in Worcester including roof repairs, cleaning & installation. Fast, reliable & affordable solutions for your home or business.",
     gradient: "linear-gradient(160deg, #1e1e3d 0%, #2d2d5e 100%)",
     description:
       "From emergency roof repairs to complete reroofing projects, PRP Services handles all types of residential and commercial roofing work across Worcestershire. We work quickly to protect your property and minimise disruption.",
@@ -44,8 +54,12 @@ const SERVICES: Record<
       "Emergency roof repairs",
     ],
   },
-  "patios-driveways": {
+  "driveways-patios-worcester": {
     name: "Patios & Driveways",
+    metaTitle:
+      "Driveways & Patio Installation Worcester | Block Paving Experts | PRP Services",
+    metaDescription:
+      "High-quality driveway and patio installation in Worcester. Block paving, resin driveways & custom patios at competitive prices.",
     gradient: "linear-gradient(160deg, #3d2a1a 0%, #5e4a2d 100%)",
     description:
       "Transform your outdoor space with a beautiful new patio or driveway. We work with a wide range of materials including block paving, natural stone, concrete, and tarmac to create stunning, durable results that add real value to your property.",
@@ -60,8 +74,12 @@ const SERVICES: Record<
       "Drainage solutions",
     ],
   },
-  "landscaping-tree-surgery": {
+  "landscaping-services": {
     name: "Landscaping & Tree Surgery",
+    metaTitle:
+      "Landscaping Services Worcester | Garden Design & Makeovers | PRP Services",
+    metaDescription:
+      "Transform your outdoor space with professional landscaping services in Worcester. Garden design, maintenance & complete makeovers available.",
     gradient: "linear-gradient(160deg, #1a3d1a 0%, #2a5e2a 100%)",
     description:
       "From complete garden makeovers to professional tree surgery, our team has the skills and equipment to transform any outdoor space. We take pride in delivering beautiful, practical gardens that our customers love.",
@@ -84,8 +102,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const service = SERVICES[params.slug];
   if (!service) return {};
   return {
-    title: `${service.name} | PRP Services Worcestershire`,
-    description: service.description,
+    title: service.metaTitle,
+    description: service.metaDescription,
   };
 }
 
@@ -106,7 +124,7 @@ export default function ServicePage({ params }: Props) {
         className="py-24 px-4 text-center"
         style={{
           background: `linear-gradient(rgba(8,18,38,0.78), rgba(8,18,38,0.78)), url('${
-            { fencing: "/001.jpg", "roofing-repairs": "/005.jpg", "patios-driveways": "/004.jpg", "landscaping-tree-surgery": "/007.jpg" }[params.slug] ?? "/home-hero-1.jpg"
+            { "fencing-services": "/001.jpg", "roofing-services": "/005.jpg", "driveways-patios-worcester": "/004.jpg", "landscaping-services": "/007.jpg" }[params.slug] ?? "/home-hero-1.jpg"
           }') center/cover no-repeat, ${service.gradient}`,
         }}>
         <div className="max-w-3xl mx-auto">

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { UploadButton } from "@/lib/uploadthing";
+import RichTextEditor from "@/components/RichTextEditor";
 
 function slugify(text: string) {
   return text
@@ -35,6 +36,11 @@ export default function NewBlogPost() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const cleaned = form.content.replace(/<(.|\n)*?>/g, "").trim();
+    if (!cleaned) {
+      setError("Blog content khali nahi ho sakta.");
+      return;
+    }
     setSaving(true);
     setError("");
     try {
@@ -62,7 +68,7 @@ export default function NewBlogPost() {
           </svg>
         </Link>
         <div>
-          <h1 className="text-2xl font-extrabold" style={{ color: "#1B2A41" }}>New Blog Post</h1>
+          <h1 className="text-2xl font-extrabold" style={{ color: "#1e3560" }}>New Blog Post</h1>
           <p className="text-sm text-gray-500">Fill in the details below to create a new post.</p>
         </div>
       </div>
@@ -73,7 +79,7 @@ export default function NewBlogPost() {
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-          <h2 className="font-bold text-sm mb-4" style={{ color: "#1B2A41" }}>Post Details</h2>
+          <h2 className="font-bold text-sm mb-4" style={{ color: "#1e3560" }}>Post Details</h2>
           <div className="space-y-4">
             <div>
               <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5">Title *</label>
@@ -83,7 +89,7 @@ export default function NewBlogPost() {
                 onChange={(e) => set("title", e.target.value)}
                 placeholder="Enter blog post title"
                 required
-                className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400"
+                className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[#2d5486] focus:ring-1 focus:ring-[#2d5486]"
               />
             </div>
             <div>
@@ -95,7 +101,7 @@ export default function NewBlogPost() {
                   value={form.slug}
                   onChange={(e) => set("slug", e.target.value)}
                   required
-                  className="flex-1 px-4 py-3 border border-gray-200 rounded-r-lg text-sm focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400"
+                  className="flex-1 px-4 py-3 border border-gray-200 rounded-r-lg text-sm focus:outline-none focus:border-[#2d5486] focus:ring-1 focus:ring-[#2d5486]"
                 />
               </div>
             </div>
@@ -106,7 +112,7 @@ export default function NewBlogPost() {
                 onChange={(e) => set("excerpt", e.target.value)}
                 placeholder="Brief description shown on the blog listing page"
                 rows={2}
-                className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-orange-400 resize-none"
+                className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[#2d5486] resize-none"
               />
             </div>
           </div>
@@ -114,7 +120,7 @@ export default function NewBlogPost() {
 
         {/* Cover Image Upload */}
         <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-          <h2 className="font-bold text-sm mb-4" style={{ color: "#1B2A41" }}>Cover Image</h2>
+          <h2 className="font-bold text-sm mb-4" style={{ color: "#1e3560" }}>Cover Image</h2>
 
           {form.coverImage ? (
             <div className="space-y-3">
@@ -149,7 +155,7 @@ export default function NewBlogPost() {
                 }}
                 appearance={{
                   button: {
-                    backgroundColor: "#FF5A1A",
+                    backgroundColor: "#2d5486",
                     color: "white",
                     fontWeight: "bold",
                     fontSize: "13px",
@@ -166,15 +172,8 @@ export default function NewBlogPost() {
 
         {/* Content */}
         <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-          <h2 className="font-bold text-sm mb-4" style={{ color: "#1B2A41" }}>Blog Content *</h2>
-          <textarea
-            value={form.content}
-            onChange={(e) => set("content", e.target.value)}
-            placeholder="Yahan apna blog content likhein..."
-            rows={16}
-            required
-            className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-orange-400 resize-y"
-          />
+          <h2 className="font-bold text-sm mb-4" style={{ color: "#1e3560" }}>Blog Content *</h2>
+          <RichTextEditor value={form.content} onChange={(html) => set("content", html)} />
         </div>
 
         <div className="flex items-center justify-end gap-4">
@@ -185,7 +184,7 @@ export default function NewBlogPost() {
             type="submit"
             disabled={saving || uploading}
             className="px-8 py-3 rounded-lg text-sm font-bold text-white disabled:opacity-60"
-            style={{ backgroundColor: "#FF5A1A" }}
+            style={{ backgroundColor: "#2d5486" }}
           >
             {saving ? "Publishing…" : "Publish Post"}
           </button>

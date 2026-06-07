@@ -29,13 +29,13 @@ export default function AdminBlogList() {
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-extrabold" style={{ color: "#1B2A41" }}>Blog Posts</h1>
+          <h1 className="text-2xl font-extrabold" style={{ color: "#1e3560" }}>Blog Posts</h1>
           <p className="text-sm text-gray-500 mt-1">Manage all blog posts from here.</p>
         </div>
         <Link
           href="/admin/blog/new"
           className="flex items-center gap-2 px-5 py-2.5 rounded text-white font-bold text-sm transition-colors"
-          style={{ backgroundColor: "#FF5A1A" }}
+          style={{ backgroundColor: "#2d5486" }}
         >
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4v16m8-8H4" />
@@ -51,7 +51,7 @@ export default function AdminBlogList() {
         ) : posts.length === 0 ? (
           <div className="py-20 text-center">
             <p className="text-gray-400 mb-4">No blog posts yet.</p>
-            <Link href="/admin/blog/new" className="text-sm font-bold" style={{ color: "#FF5A1A" }}>
+            <Link href="/admin/blog/new" className="text-sm font-bold" style={{ color: "#2d5486" }}>
               Create your first post →
             </Link>
           </div>
@@ -72,7 +72,7 @@ export default function AdminBlogList() {
                   <td className="px-6 py-4 text-gray-400">{i + 1}</td>
                   <td className="px-6 py-4">
                     <div>
-                      <p className="font-semibold" style={{ color: "#1B2A41" }}>{post.title}</p>
+                      <p className="font-semibold" style={{ color: "#1e3560" }}>{post.title}</p>
                       {post.excerpt && (
                         <p className="text-gray-400 text-xs mt-0.5 line-clamp-1">{post.excerpt}</p>
                       )}
@@ -94,7 +94,7 @@ export default function AdminBlogList() {
                       <Link
                         href={`/admin/blog/${post.id}/edit`}
                         className="px-3 py-1.5 rounded text-xs font-semibold text-white transition-colors"
-                        style={{ backgroundColor: "#1B2A41" }}
+                        style={{ backgroundColor: "#1e3560" }}
                       >
                         Edit
                       </Link>
