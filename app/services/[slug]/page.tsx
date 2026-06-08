@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 
 /* Hero background image per service */
@@ -11,22 +10,29 @@ const HERO_IMAGE: Record<string, string> = {
   "landscaping-services": "/007.jpg",
 };
 
-/* Featured image shown at the top of the content */
-const FEATURED_IMAGE: Record<string, string> = {
-  "fencing-services": "/gallery/fencing/002.jpg",
-  "roofing-services": "/gallery/roofing/001.jpg",
-  "driveways-patios-worcester": "/gallery/driveways-patios/001.jpg",
-  "landscaping-services": "/007.jpg",
+/* Curated real project photos per service. Shown uncropped (natural aspect)
+   so the brand watermark on each photo stays fully visible. */
+const SERVICE_SHOWCASE: Record<string, string[]> = {
+  "fencing-services": [
+    "/gallery/fencing/002.jpg",
+    "/gallery/fencing/005.jpg",
+    "/gallery/fencing/008.jpg",
+    "/gallery/fencing/012.jpg",
+  ],
+  "roofing-services": [
+    "/gallery/roofing/001.jpg",
+    "/gallery/roofing/003.jpg",
+    "/gallery/roofing/005.jpg",
+    "/gallery/roofing/007.jpg",
+  ],
+  "driveways-patios-worcester": [
+    "/gallery/driveways-patios/001.jpg",
+    "/gallery/driveways-patios/003.jpg",
+    "/gallery/driveways-patios/006.jpg",
+    "/gallery/driveways-patios/008.jpg",
+  ],
+  "landscaping-services": ["/007.jpg"],
 };
-
-/* Real project photos per service (content-appropriate). Landscaping has no set. */
-const SERVICE_GALLERY: Record<string, { dir: string; images: number[] }> = {
-  "fencing-services": { dir: "fencing", images: [1, 3, 4, 5, 6, 7] },
-  "roofing-services": { dir: "roofing", images: [2, 3, 4, 5, 6, 7] },
-  "driveways-patios-worcester": { dir: "driveways-patios", images: [2, 3, 4, 6, 7, 8] },
-};
-
-const pad = (n: number) => String(n).padStart(3, "0");
 
 const SERVICES: Record<
   string,
@@ -178,16 +184,6 @@ export default function ServicePage({ params }: Props) {
 
           {/* Main content */}
           <div className="lg:col-span-2">
-            <div className="relative w-full h-60 sm:h-80 rounded-lg overflow-hidden shadow-lg mb-7">
-              <Image
-                src={FEATURED_IMAGE[params.slug] ?? "/home-hero-1.jpg"}
-                alt={`${service.name} project by PRP Services in Worcestershire`}
-                fill
-                sizes="(max-width: 1024px) 100vw, 66vw"
-                className="object-cover"
-                priority
-              />
-            </div>
             <h2 className="text-2xl font-bold mb-4" style={{ color: "#1e3560" }}>
               {service.name}
             </h2>
@@ -271,46 +267,67 @@ export default function ServicePage({ params }: Props) {
         </div>
       </section>
 
-      {/* Recent projects gallery (content-appropriate photos) */}
-      {SERVICE_GALLERY[params.slug] && (
-        <section className="py-16 px-4" style={{ backgroundColor: "#f4f6f9" }}>
-          <div className="max-w-6xl mx-auto">
-            <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
-              <div>
-                <span className="section-label">OUR WORK</span>
-                <h2 className="section-heading">Recent {service.name} projects</h2>
-              </div>
-              <Link
-                href="/gallery"
-                className="text-sm font-bold hover:underline whitespace-nowrap"
-                style={{ color: "#2d5486" }}>
-                View full gallery →
-              </Link>
+      {/* Showcase — curated photos on one side, content on the other */}
+      {SERVICE_SHOWCASE[params.slug] && (
+        <section className="py-20 px-4 bg-white overflow-hidden">
+          <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Image side — natural aspect ratios, never cropped */}
+            <div className="relative">
+              {/* soft layered backdrop for depth */}
+              <div
+                className="absolute -inset-3 sm:-inset-5 rounded-2xl -z-10"
+                style={{ background: "linear-gradient(135deg, rgba(30,53,96,0.07), rgba(45,84,134,0.04))" }}
+              />
+              {SERVICE_SHOWCASE[params.slug].length === 1 ? (
+                /* Single feature image */
+                <div className="rounded-xl overflow-hidden shadow-lg">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={SERVICE_SHOWCASE[params.slug][0]}
+                    alt={`${service.name} project in Worcestershire`}
+                    loading="lazy"
+                    className="w-full h-auto block"
+                  />
+                </div>
+              ) : (
+                /* Masonry collage — keeps each photo's full, uncropped shape */
+                <div className="columns-2 gap-3 sm:gap-4">
+                  {SERVICE_SHOWCASE[params.slug].map((src) => (
+                    /* eslint-disable-next-line @next/next/no-img-element */
+                    <img
+                      key={src}
+                      src={src}
+                      alt={`${service.name} project in Worcestershire`}
+                      loading="lazy"
+                      className="w-full h-auto block rounded-xl shadow-md mb-3 sm:mb-4 break-inside-avoid"
+                    />
+                  ))}
+                </div>
+              )}
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
-              {SERVICE_GALLERY[params.slug].images.map((n) => {
-                const dir = SERVICE_GALLERY[params.slug].dir;
-                return (
-                  <Link
-                    key={n}
-                    href="/gallery"
-                    className="gallery-card group relative block overflow-hidden rounded-lg shadow-sm"
-                    style={{ aspectRatio: "4/3" }}>
-                    <Image
-                      src={`/gallery/${dir}/thumbs/${pad(n)}.jpg`}
-                      alt={`${service.name} project ${n} in Worcestershire`}
-                      fill
-                      sizes="(max-width: 768px) 50vw, 33vw"
-                      className="gallery-card-image object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <span className="absolute bottom-3 left-3 right-3 text-white text-xs font-bold translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                      View in gallery →
-                    </span>
-                  </Link>
-                );
-              })}
+            {/* Content */}
+            <div>
+              <span className="section-label">OUR RECENT WORK</span>
+              <h2 className="section-heading mb-5">Craftsmanship that speaks for itself</h2>
+              <p className="text-gray-600 text-sm leading-relaxed mb-4">
+                Take a look at a few of our recent {service.name.toLowerCase()} projects from across
+                Worcestershire. Every job is completed with the same care, quality materials, and
+                attention to detail &mdash; whatever the size.
+              </p>
+              <p className="text-gray-600 text-sm leading-relaxed mb-7">
+                We&apos;d love to do the same for your property. Browse the full gallery or get in
+                touch for a free, no-obligation quote.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Link href="/gallery" className="btn-navy">View Full Gallery</Link>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2 px-7 py-3 rounded-sm text-[13px] font-bold uppercase tracking-wide border-2 transition-all hover:bg-[#1e3560] hover:text-white hover:-translate-y-0.5"
+                  style={{ borderColor: "#1e3560", color: "#1e3560" }}>
+                  Get a Free Quote
+                </Link>
+              </div>
             </div>
           </div>
         </section>

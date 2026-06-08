@@ -233,7 +233,7 @@ body { background: #fff; color: #1e3560; font-family: "Inter", sans-serif; }
 /* ── Stars ──────────────────────────────────────────── */
 .stars { color: #f4b942; }
 
-/* ── Floating WhatsApp ──────────────────────────────── */
+/* ── Floating Call button ───────────────────────────── */
 .wa-fab {
   position: fixed;
   bottom: 20px;
@@ -242,7 +242,7 @@ body { background: #fff; color: #1e3560; font-family: "Inter", sans-serif; }
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: #25D366;
+  background: #1e3560;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -251,7 +251,7 @@ body { background: #fff; color: #1e3560; font-family: "Inter", sans-serif; }
 }
 .wa-fab:hover {
   transform: scale(1.12);
-  box-shadow: 0 8px 24px rgba(37,211,102,0.5);
+  box-shadow: 0 8px 24px rgba(30,53,96,0.55);
 }
 .wa-fab::before,
 .wa-fab::after {
@@ -259,7 +259,7 @@ body { background: #fff; color: #1e3560; font-family: "Inter", sans-serif; }
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  background: #25D366;
+  background: #1e3560;
   z-index: -1;
 }
 .wa-fab::before { animation: wa-pulse 2.4s ease-out infinite; }
