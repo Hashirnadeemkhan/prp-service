@@ -418,6 +418,96 @@ body { background: #fff; color: #1e3560; font-family: "Inter", sans-serif; }
 .prp-quill .ql-editor { min-height: 280px; }
 .prp-quill .ql-editor.ql-blank::before { color: #9ca3af; font-style: normal; }
 
+/* ── Gallery filter pills ───────────────────────────── */
+.gallery-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 20px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: #1e3560;
+  background: #eef2f8;
+  border: 1.5px solid #e0e7f1;
+  cursor: pointer;
+  transition: background 0.25s, color 0.25s, border-color 0.25s, transform 0.25s, box-shadow 0.3s;
+}
+.gallery-filter:hover {
+  border-color: #5b8ac0;
+  transform: translateY(-2px);
+}
+.gallery-filter.active {
+  background: #1e3560;
+  color: #fff;
+  border-color: #1e3560;
+  box-shadow: 0 8px 20px rgba(30, 53, 96, 0.28);
+}
+.gallery-filter .count {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: rgba(30, 53, 96, 0.1);
+  color: #1e3560;
+}
+.gallery-filter.active .count {
+  background: rgba(255, 255, 255, 0.22);
+  color: #fff;
+}
+
+/* ── Gallery tile fade-in ───────────────────────────── */
+.gallery-tile {
+  opacity: 0;
+  transform: translateY(14px) scale(0.985);
+  animation: tile-in 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+@keyframes tile-in {
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ── Lightbox ───────────────────────────────────────── */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(8, 14, 28, 0.92);
+  backdrop-filter: blur(4px);
+  animation: lb-fade 0.25s ease forwards;
+  padding: 24px;
+}
+@keyframes lb-fade { from { opacity: 0; } to { opacity: 1; } }
+.lightbox-img {
+  max-width: min(1100px, 92vw);
+  max-height: 82vh;
+  border-radius: 6px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+  animation: lb-zoom 0.3s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+@keyframes lb-zoom { from { opacity: 0; transform: scale(0.94); } to { opacity: 1; transform: scale(1); } }
+.lightbox-btn {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  transition: background 0.25s, transform 0.25s, border-color 0.25s;
+}
+.lightbox-btn:hover {
+  background: rgba(255, 255, 255, 0.92);
+  color: #1e3560;
+  border-color: #fff;
+  transform: scale(1.08);
+}
+
 /* ── Respect reduced motion ─────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

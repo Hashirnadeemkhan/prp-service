@@ -5,7 +5,10 @@
       "WebFetch(domain:wkroofbuild.com)",
       "WebFetch(domain:prp-services.uk)",
       "Bash(npm run *)",
-      "Bash(npx tsc *)"
+      "Bash(npx tsc *)",
+      "Bash(curl -sL \"https://prp-services.uk/gallery.html\" -o gallery_ref.html)",
+      "Bash(echo \"EXIT:$?\")",
+      "Bash(wc -c gallery_ref.html)"
     ]
   }
 }

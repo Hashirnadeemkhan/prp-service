@@ -1,25 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import GalleryClient from "./GalleryClient";
 
 export const metadata: Metadata = {
   title: "Gallery | PRP Services Worcestershire",
   description:
-    "View our gallery of completed fencing, roofing, patio, driveway, and landscaping projects across Worcestershire.",
+    "Browse our gallery of completed fencing, driveways & patios, and roofing projects across Worcestershire. Quality property maintenance you can see.",
 };
-
-const GALLERY_ITEMS = [
-  { src: "/001.jpg",         label: "Closeboard Fence",            category: "Fencing",            slug: "fencing-services" },
-  { src: "/002.jpg",         label: "Wooden Gate Installation",    category: "Fencing",            slug: "fencing-services" },
-  { src: "/003.jpg",         label: "Decorative Trellis Fence",    category: "Fencing",            slug: "fencing-services" },
-  { src: "/008.jpg",         label: "Double Wooden Gates",         category: "Fencing",            slug: "fencing-services" },
-  { src: "/009.jpg",         label: "Fence Panel Construction",    category: "Fencing",            slug: "fencing-services" },
-  { src: "/home-hero-1.jpg", label: "Natural Stone Patio",         category: "Patios & Driveways", slug: "driveways-patios-worcester" },
-  { src: "/004.jpg",         label: "Block Paving Driveway",       category: "Patios & Driveways", slug: "driveways-patios-worcester" },
-  { src: "/006.jpg",         label: "Tarmac Driveway",             category: "Patios & Driveways", slug: "driveways-patios-worcester" },
-  { src: "/005.jpg",         label: "New Slate Roof",              category: "Roofing & Repairs",  slug: "roofing-services" },
-  { src: "/bg-image-2.jpg",  label: "Roof Repair & Maintenance",   category: "Roofing & Repairs",  slug: "roofing-services" },
-  { src: "/007.jpg",         label: "Garden & Lawn Landscaping",   category: "Landscaping",        slug: "landscaping-services" },
-];
 
 export default function GalleryPage() {
   return (
@@ -27,12 +14,17 @@ export default function GalleryPage() {
       {/* Banner */}
       <section
         className="py-20 px-4 text-center"
-        style={{ background: "linear-gradient(135deg, #0d1825 0%, #1e3560 100%)" }}>
+        style={{
+          background:
+            "linear-gradient(135deg, rgba(13,24,37,0.7) 0%, rgba(30,53,96,0.62) 100%), url('/gallery/driveways-patios/001.jpg') center/cover no-repeat",
+          backgroundColor: "#0d1825",
+        }}>
         <div className="max-w-3xl mx-auto">
           <span className="section-label">OUR WORK</span>
           <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4">Gallery</h1>
           <p className="text-sm mb-6" style={{ color: "#b0c4d8" }}>
-            A selection of our recently completed projects from around Worcestershire.
+            Whether you want some inspiration or would just like to see the quality of our work,
+            have a look at some of our recent projects from around Worcestershire.
           </p>
           <div className="flex items-center justify-center gap-2 text-sm" style={{ color: "#7a9abd" }}>
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
@@ -42,33 +34,8 @@ export default function GalleryPage() {
         </div>
       </section>
 
-      {/* Gallery grid */}
-      <section className="py-16 px-4 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-            {GALLERY_ITEMS.map((item, i) => (
-              <div key={i} className="gallery-card group relative" style={{ aspectRatio: "4/3" }}>
-                <div
-                  className="gallery-card-image absolute inset-0"
-                  style={{ backgroundImage: `url('${item.src}')`, backgroundSize: "cover", backgroundPosition: "center" }}
-                />
-                {/* Hover overlay */}
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-colors duration-300" />
-                {/* Caption slides up */}
-                <div className="absolute bottom-0 left-0 right-0 p-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                  <p className="text-white text-xs font-bold leading-tight">{item.label}</p>
-                  <Link
-                    href={`/services/${item.slug}`}
-                    className="text-xs hover:underline"
-                    style={{ color: "#b0c4d8" }}>
-                    {item.category}
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Interactive gallery (filters + lightbox) */}
+      <GalleryClient />
 
       {/* CTA */}
       <section className="py-12 px-4 text-center" style={{ backgroundColor: "#f4f6f9" }}>
@@ -77,7 +44,8 @@ export default function GalleryPage() {
             Like what you see?
           </h3>
           <p className="text-gray-600 text-sm mb-6">
-            Get in touch today for a free, no-obligation quote on your project.
+            Please don&apos;t hesitate to get in touch for any property maintenance work. No job is
+            too big or small &mdash; we welcome all enquiries.
           </p>
           <Link href="/contact" className="btn-navy">Get a Free Quote</Link>
         </div>

@@ -48,7 +48,11 @@ export default function ServicesPage() {
       {/* Banner */}
       <section
         className="py-20 px-4 text-center"
-        style={{ background: "linear-gradient(135deg, #0d1825 0%, #1e3560 100%)" }}>
+        style={{
+          background:
+            "linear-gradient(135deg, rgba(13,24,37,0.7) 0%, rgba(30,53,96,0.62) 100%), url('/004.jpg') center/cover no-repeat",
+          backgroundColor: "#0d1825",
+        }}>
         <div className="max-w-3xl mx-auto">
           <span className="section-label">WHAT WE OFFER</span>
           <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4">Our Services</h1>

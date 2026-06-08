@@ -177,7 +177,7 @@ export default function HomeContent() {
         className="py-20 px-4 relative overflow-hidden"
         style={{
           background:
-            "linear-gradient(rgba(8,18,38,0.78), rgba(8,18,38,0.78)), url('/bg-image-2.jpg') center/cover no-repeat",
+            "linear-gradient(rgba(8,18,38,0.66), rgba(8,18,38,0.66)), url('/bg-image-2.jpg') center/cover no-repeat",
           backgroundColor: "#0d1e38",
           backgroundAttachment: "fixed",
         }}>
@@ -335,7 +335,7 @@ export default function HomeContent() {
         className="py-20 px-4 relative"
         style={{
           background:
-            "linear-gradient(rgba(8,18,38,0.82), rgba(8,18,38,0.82)), url('/bg-image-2.jpg') center/cover no-repeat",
+            "linear-gradient(rgba(8,18,38,0.72), rgba(8,18,38,0.72)), url('/bg-image-2.jpg') center/cover no-repeat",
           backgroundColor: "#0d1e38",
           backgroundAttachment: "fixed",
         }}>

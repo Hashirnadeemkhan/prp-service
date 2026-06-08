@@ -58,7 +58,11 @@ export default function ReviewsPage() {
       {/* Banner */}
       <section
         className="py-20 px-4 text-center"
-        style={{ background: "linear-gradient(135deg, #0d1825 0%, #1e3560 100%)" }}>
+        style={{
+          background:
+            "linear-gradient(135deg, rgba(13,24,37,0.72) 0%, rgba(30,53,96,0.64) 100%), url('/home-hero-1.jpg') center/cover no-repeat",
+          backgroundColor: "#0d1825",
+        }}>
         <div className="max-w-3xl mx-auto">
           <span className="section-label">CUSTOMER FEEDBACK</span>
           <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4">

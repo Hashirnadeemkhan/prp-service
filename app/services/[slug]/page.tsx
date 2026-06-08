@@ -1,6 +1,32 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
+
+/* Hero background image per service */
+const HERO_IMAGE: Record<string, string> = {
+  "fencing-services": "/001.jpg",
+  "roofing-services": "/005.jpg",
+  "driveways-patios-worcester": "/004.jpg",
+  "landscaping-services": "/007.jpg",
+};
+
+/* Featured image shown at the top of the content */
+const FEATURED_IMAGE: Record<string, string> = {
+  "fencing-services": "/gallery/fencing/002.jpg",
+  "roofing-services": "/gallery/roofing/001.jpg",
+  "driveways-patios-worcester": "/gallery/driveways-patios/001.jpg",
+  "landscaping-services": "/007.jpg",
+};
+
+/* Real project photos per service (content-appropriate). Landscaping has no set. */
+const SERVICE_GALLERY: Record<string, { dir: string; images: number[] }> = {
+  "fencing-services": { dir: "fencing", images: [1, 3, 4, 5, 6, 7] },
+  "roofing-services": { dir: "roofing", images: [2, 3, 4, 5, 6, 7] },
+  "driveways-patios-worcester": { dir: "driveways-patios", images: [2, 3, 4, 6, 7, 8] },
+};
+
+const pad = (n: number) => String(n).padStart(3, "0");
 
 const SERVICES: Record<
   string,
@@ -123,8 +149,8 @@ export default function ServicePage({ params }: Props) {
       <section
         className="py-24 px-4 text-center"
         style={{
-          background: `linear-gradient(rgba(8,18,38,0.78), rgba(8,18,38,0.78)), url('${
-            { "fencing-services": "/001.jpg", "roofing-services": "/005.jpg", "driveways-patios-worcester": "/004.jpg", "landscaping-services": "/007.jpg" }[params.slug] ?? "/home-hero-1.jpg"
+          background: `linear-gradient(rgba(8,18,38,0.45) 0%, rgba(8,18,38,0.68) 100%), url('${
+            HERO_IMAGE[params.slug] ?? "/home-hero-1.jpg"
           }') center/cover no-repeat, ${service.gradient}`,
         }}>
         <div className="max-w-3xl mx-auto">
@@ -152,6 +178,16 @@ export default function ServicePage({ params }: Props) {
 
           {/* Main content */}
           <div className="lg:col-span-2">
+            <div className="relative w-full h-60 sm:h-80 rounded-lg overflow-hidden shadow-lg mb-7">
+              <Image
+                src={FEATURED_IMAGE[params.slug] ?? "/home-hero-1.jpg"}
+                alt={`${service.name} project by PRP Services in Worcestershire`}
+                fill
+                sizes="(max-width: 1024px) 100vw, 66vw"
+                className="object-cover"
+                priority
+              />
+            </div>
             <h2 className="text-2xl font-bold mb-4" style={{ color: "#1e3560" }}>
               {service.name}
             </h2>
@@ -234,6 +270,51 @@ export default function ServicePage({ params }: Props) {
           </div>
         </div>
       </section>
+
+      {/* Recent projects gallery (content-appropriate photos) */}
+      {SERVICE_GALLERY[params.slug] && (
+        <section className="py-16 px-4" style={{ backgroundColor: "#f4f6f9" }}>
+          <div className="max-w-6xl mx-auto">
+            <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
+              <div>
+                <span className="section-label">OUR WORK</span>
+                <h2 className="section-heading">Recent {service.name} projects</h2>
+              </div>
+              <Link
+                href="/gallery"
+                className="text-sm font-bold hover:underline whitespace-nowrap"
+                style={{ color: "#2d5486" }}>
+                View full gallery →
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+              {SERVICE_GALLERY[params.slug].images.map((n) => {
+                const dir = SERVICE_GALLERY[params.slug].dir;
+                return (
+                  <Link
+                    key={n}
+                    href="/gallery"
+                    className="gallery-card group relative block overflow-hidden rounded-lg shadow-sm"
+                    style={{ aspectRatio: "4/3" }}>
+                    <Image
+                      src={`/gallery/${dir}/thumbs/${pad(n)}.jpg`}
+                      alt={`${service.name} project ${n} in Worcestershire`}
+                      fill
+                      sizes="(max-width: 768px) 50vw, 33vw"
+                      className="gallery-card-image object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <span className="absolute bottom-3 left-3 right-3 text-white text-xs font-bold translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                      View in gallery →
+                    </span>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      )}
     </>
   );
 }
