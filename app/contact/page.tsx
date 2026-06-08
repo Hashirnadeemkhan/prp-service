@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import ContactForm from "./ContactForm";
 
 export const metadata: Metadata = {
   title: "Contact Us | PRP Services Worcestershire",
@@ -119,97 +120,7 @@ export default function ContactPage() {
           </div>
 
           {/* Form */}
-          <div
-            className="rounded-sm p-8 shadow-sm border border-gray-100"
-            style={{ backgroundColor: "#f4f6f9" }}>
-            <h3 className="text-xl font-bold mb-6" style={{ color: "#1e3560" }}>
-              Send Us a Message
-            </h3>
-            <form className="space-y-5" action="mailto:info@prp-services.uk" method="post" encType="text/plain">
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium mb-1.5" style={{ color: "#1e3560" }}>
-                    First Name
-                  </label>
-                  <input
-                    type="text"
-                    name="firstname"
-                    placeholder="John"
-                    className="w-full px-4 py-3 rounded-sm border border-gray-200 text-sm focus:outline-none focus:border-prp-blue bg-white"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1.5" style={{ color: "#1e3560" }}>
-                    Last Name
-                  </label>
-                  <input
-                    type="text"
-                    name="lastname"
-                    placeholder="Smith"
-                    className="w-full px-4 py-3 rounded-sm border border-gray-200 text-sm focus:outline-none focus:border-prp-blue bg-white"
-                    required
-                  />
-                </div>
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1.5" style={{ color: "#1e3560" }}>
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="john@example.com"
-                  className="w-full px-4 py-3 rounded-sm border border-gray-200 text-sm focus:outline-none focus:border-prp-blue bg-white"
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1.5" style={{ color: "#1e3560" }}>
-                  Phone Number
-                </label>
-                <input
-                  type="tel"
-                  name="phone"
-                  placeholder="07xxx xxxxxx"
-                  className="w-full px-4 py-3 rounded-sm border border-gray-200 text-sm focus:outline-none focus:border-prp-blue bg-white"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1.5" style={{ color: "#1e3560" }}>
-                  Service Needed
-                </label>
-                <select
-                  className="w-full px-4 py-3 rounded-sm border border-gray-200 text-sm focus:outline-none focus:border-prp-blue bg-white text-gray-600"
-                  name="service">
-                  <option value="">Select a service</option>
-                  <option>Fencing</option>
-                  <option>Roofing &amp; Repairs</option>
-                  <option>Patios &amp; Driveways</option>
-                  <option>Landscaping &amp; Tree Surgery</option>
-                  <option>Other / Not Sure</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1.5" style={{ color: "#1e3560" }}>
-                  Your Message
-                </label>
-                <textarea
-                  name="message"
-                  rows={4}
-                  placeholder="Tell us about your project..."
-                  className="w-full px-4 py-3 rounded-sm border border-gray-200 text-sm focus:outline-none focus:border-prp-blue bg-white resize-none"
-                  required
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full py-4 rounded-sm font-bold text-white transition-all hover:opacity-90"
-                style={{ backgroundColor: "#1e3560" }}>
-                Send Message →
-              </button>
-            </form>
-          </div>
+          <ContactForm />
         </div>
       </section>
     </>
