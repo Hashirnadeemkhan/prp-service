@@ -136,6 +136,13 @@ export default function Navbar() {
             onClick={() => setMobileOpen(false)}>
             Home
           </Link>
+          <Link
+            href="/about"
+            className="block py-2.5 text-sm font-semibold border-b border-gray-50"
+            style={{ color: "#1e3560" }}
+            onClick={() => setMobileOpen(false)}>
+            About Us
+          </Link>
 
           <div className="border-b border-gray-50">
             <button
@@ -164,6 +171,13 @@ export default function Navbar() {
             )}
           </div>
 
+          <Link
+            href="/blog"
+            className="block py-2.5 text-sm font-semibold border-b border-gray-50"
+            style={{ color: "#1e3560" }}
+            onClick={() => setMobileOpen(false)}>
+            Blog
+          </Link>
           <Link
             href="/gallery"
             className="block py-2.5 text-sm font-semibold border-b border-gray-50"
