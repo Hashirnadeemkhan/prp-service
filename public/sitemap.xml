@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+<url>
+  <loc>https://www.prp-services.uk/</loc>
+  <lastmod>2026-06-09T19:06:43+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://www.prp-services.uk/about</loc>
+  <lastmod>2026-06-09T19:06:43+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.prp-services.uk/blog</loc>
+  <lastmod>2026-06-09T19:06:43+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.prp-services.uk/gallery</loc>
+  <lastmod>2026-06-09T19:06:43+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.prp-services.uk/reviews</loc>
+  <lastmod>2026-06-09T19:06:43+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.prp-services.uk/contact</loc>
+  <lastmod>2026-06-09T19:06:43+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.prp-services.uk/services/fencing-services</loc>
+  <lastmod>2026-06-09T19:06:43+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.prp-services.uk/services/roofing-services</loc>
+  <lastmod>2026-06-09T19:06:43+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.prp-services.uk/services/driveways-patios-worcester</loc>
+  <lastmod>2026-06-09T19:06:43+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.prp-services.uk/services/landscaping-services</loc>
+  <lastmod>2026-06-09T19:06:43+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.prp-services.uk/privacy-policy</loc>
+  <lastmod>2026-06-09T19:06:43+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.prp-services.uk/services</loc>
+  <lastmod>2026-06-09T19:06:43+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+
+</urlset>
