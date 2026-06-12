@@ -47,14 +47,14 @@ export default function Footer() {
             Get in touch
           </h3>
           <a
-            href="tel:07593728481"
+            href="tel:+447360270797"
             className="group flex items-center gap-3 text-white font-bold text-lg hover:opacity-90 transition-opacity">
             <span
               className="flex items-center justify-center w-9 h-9 rounded-full shrink-0 transition-colors group-hover:bg-[#2d5486]"
               style={{ background: "rgba(255,255,255,0.08)" }}>
               <Phone className="w-4 h-4" style={{ color: "#7a9abd" }} />
             </span>
-            07593 728 481
+            +44 7360 270797
           </a>
           <a
             href="mailto:info@prp-services.uk"

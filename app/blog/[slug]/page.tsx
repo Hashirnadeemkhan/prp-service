@@ -84,7 +84,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
           <h2 className="text-2xl font-bold mb-3" style={{ color: "#1e3560" }}>Need Professional Help?</h2>
           <p className="text-gray-500 mb-6 text-sm">Contact PRP Services for a free, no-obligation quote anywhere across Worcestershire.</p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <a href="tel:07593728481" className="btn-navy justify-center">📞 07593 728 481</a>
+            <a href="tel:+447360270797" className="btn-navy justify-center">📞 +44 7360 270797</a>
             <Link href="/contact" className="btn-navy justify-center" style={{ background: "transparent", color: "#1e3560" }}>Contact Us</Link>
           </div>
         </div>

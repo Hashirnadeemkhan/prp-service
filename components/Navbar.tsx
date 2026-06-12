@@ -92,14 +92,14 @@ export default function Navbar() {
         {/* Right contact icons — colored circles */}
         <div className="hidden md:flex items-center gap-2">
           <a
-            href="tel:07593728481"
+            href="tel:+447360270797"
             aria-label="Call us"
             className="contact-circle"
             style={{ backgroundColor: "#f4a51e" }}>
             <FaPhoneAlt size={14} color="white" />
           </a>
           <a
-            href="https://wa.me/447593728481"
+            href="https://wa.me/447360270797"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="WhatsApp"
@@ -203,14 +203,14 @@ export default function Navbar() {
           {/* Mobile contact icons row */}
           <div className="pt-4 flex gap-2 justify-center">
             <a
-              href="tel:07593728481"
+              href="tel:+447360270797"
               aria-label="Call us"
               className="contact-circle"
               style={{ backgroundColor: "#f4a51e" }}>
               <FaPhoneAlt size={14} color="white" />
             </a>
             <a
-              href="https://wa.me/447593728481"
+              href="https://wa.me/447360270797"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="WhatsApp"

@@ -68,8 +68,8 @@ export default function ContactForm() {
         <p className="text-gray-600 text-sm mb-6 max-w-sm">
           We&apos;ve received your enquiry and will get back to you as soon as possible. For anything
           urgent, please call us on{" "}
-          <a href="tel:07593728481" className="font-semibold" style={{ color: "#2d5486" }}>
-            07593 728 481
+          <a href="tel:+447360270797" className="font-semibold" style={{ color: "#2d5486" }}>
+            +44 7360 270797
           </a>
           .
         </p>

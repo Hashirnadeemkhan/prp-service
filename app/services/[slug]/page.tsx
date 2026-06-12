@@ -233,10 +233,10 @@ export default function ServicePage({ params }: Props) {
                 quickly.
               </p>
               <a
-                href="tel:07593728481"
+                href="tel:+447360270797"
                 className="block text-center text-white font-bold py-3 rounded-sm mb-3 hover:opacity-90 transition-opacity text-sm tracking-wide"
                 style={{ backgroundColor: "#2d5486" }}>
-                07593 728 481
+                +44 7360 270797
               </a>
               <Link
                 href="/contact"

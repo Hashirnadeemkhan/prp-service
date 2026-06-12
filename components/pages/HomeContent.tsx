@@ -110,8 +110,8 @@ export default function HomeContent() {
       <div className="phone-banner py-4 px-4 text-center" style={{ backgroundColor: "#1a3a6e" }}>
         <p className="text-white text-sm md:text-base font-medium relative z-10">
           Call us today on{" "}
-          <a href="tel:07593728481" className="font-extrabold hover:underline">
-            07593 728 481
+          <a href="tel:+447360270797" className="font-extrabold hover:underline">
+            +44 7360 270797
           </a>
         </p>
       </div>
@@ -361,7 +361,7 @@ export default function HomeContent() {
                 </svg>
                 Get a Quote
               </Link>
-              <a href="tel:07593728481" className="btn-white">
+              <a href="tel:+447360270797" className="btn-white">
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     strokeLinecap="round"

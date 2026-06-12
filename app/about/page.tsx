@@ -324,10 +324,10 @@ export default function AboutPage() {
             <div className="flex flex-wrap gap-3 justify-center">
               <Link href="/contact" className="btn-navy">Get a Free Quote</Link>
               <a
-                href="tel:07593728481"
+                href="tel:+447360270797"
                 className="inline-flex items-center gap-2 px-7 py-3 rounded-sm text-[13px] font-bold uppercase tracking-wide border-2 transition-all hover:bg-[#1e3560] hover:text-white hover:-translate-y-0.5"
                 style={{ borderColor: "#1e3560", color: "#1e3560" }}>
-                <PhoneCall className="w-4 h-4" /> 07593 728 481
+                <PhoneCall className="w-4 h-4" /> +44 7360 270797
               </a>
             </div>
           </FadeInUp>

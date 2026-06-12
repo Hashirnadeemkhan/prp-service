@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
   if (!process.env.RESEND_API_KEY) {
     console.error("RESEND_API_KEY is not set");
     return NextResponse.json(
-      { error: "Email service is not configured. Please call us on 07593 728 481." },
+      { error: "Email service is not configured. Please call us on +44 7360 270797." },
       { status: 500 }
     );
   }
@@ -88,7 +88,7 @@ export async function POST(req: NextRequest) {
     if (error) {
       console.error("Resend error:", error);
       return NextResponse.json(
-        { error: "Sorry, your message could not be sent. Please call us on 07593 728 481." },
+        { error: "Sorry, your message could not be sent. Please call us on +44 7360 270797." },
         { status: 502 }
       );
     }
@@ -97,7 +97,7 @@ export async function POST(req: NextRequest) {
   } catch (err) {
     console.error("Contact send failed:", err);
     return NextResponse.json(
-      { error: "Sorry, something went wrong. Please call us on 07593 728 481." },
+      { error: "Sorry, something went wrong. Please call us on +44 7360 270797." },
       { status: 500 }
     );
   }
