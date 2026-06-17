@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Services | PRP Services Worcestershire",
   description:
     "Explore all property maintenance services by PRP Services in Worcestershire — fencing, roofing, patios, driveways, landscaping and tree surgery.",
+  alternates: { canonical: "/services" },
 };
 
 const SERVICES = [

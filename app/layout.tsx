@@ -9,6 +9,7 @@ import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.prp-services.uk"),
   title: "PRP Services | Complete Property Care in Worcestershire",
   description:
     "PRP Services — complete property care in Worcestershire. Fencing, roofing, patios, driveways, landscaping & tree surgery. Over 10 years experience. Call +44 7360 270797.",
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
     title: "PRP Services | Complete Property Care in Worcestershire",
     description:
       "Expert property maintenance services across Worcestershire. Fencing, roofing, patios, landscaping and more.",
-    url: "https://prp-services.uk",
+    url: "https://www.prp-services.uk",
     siteName: "PRP Services",
   },
 };

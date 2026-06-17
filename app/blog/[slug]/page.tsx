@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
@@ -11,6 +12,20 @@ async function getPost(slug: string) {
   } catch {
     return null;
   }
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const post = await getPost(params.slug);
+  if (!post) return {};
+  return {
+    title: `${post.title} | PRP Services`,
+    description: post.excerpt || undefined,
+    alternates: { canonical: `/blog/${post.slug}` },
+  };
 }
 
 export default async function BlogPostPage({ params }: { params: { slug: string } }) {

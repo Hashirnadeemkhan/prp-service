@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Blog | PRP Services Worcestershire",
   description:
     "Tips, guides, and news about property maintenance, fencing, roofing, and landscaping from the PRP Services team.",
+  alternates: { canonical: "/blog" },
 };
 
 type Post = {

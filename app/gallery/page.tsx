@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Gallery | PRP Services Worcestershire",
   description:
     "Browse our gallery of completed fencing, driveways & patios, and roofing projects across Worcestershire. Quality property maintenance you can see.",
+  alternates: { canonical: "/gallery" },
 };
 
 export default function GalleryPage() {

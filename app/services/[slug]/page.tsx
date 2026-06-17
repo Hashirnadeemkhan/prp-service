@@ -136,6 +136,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: service.metaTitle,
     description: service.metaDescription,
+    alternates: { canonical: `/services/${params.slug}` },
   };
 }
 

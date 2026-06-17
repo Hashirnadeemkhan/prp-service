@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   title: "About Us | PRP Services Worcestershire",
   description:
     "Get to know PRP Services — a local, family-run property maintenance team in Worcester with over 10 years' experience in fencing, roofing, driveways, patios and landscaping.",
-  alternates: { canonical: "https://prp-services.uk/about" },
+  alternates: { canonical: "/about" },
 };
 
 const STATS = [

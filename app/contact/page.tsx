@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Contact Us | PRP Services Worcestershire",
   description:
     "Get in touch with PRP Services for a free property maintenance quote in Worcestershire. Call +44 7360 270797 or email info@prp-services.uk.",
+  alternates: { canonical: "/contact" },
 };
 
 export default function ContactPage() {

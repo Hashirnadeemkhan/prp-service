@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "Fencing, Roofing & Landscaping Services Worcester | PRP Services",
   description:
     "Professional fencing, roofing, landscaping, patios & driveway services in Worcester. Reliable, affordable & local experts.",
-  alternates: { canonical: "https://prp-services.uk" },
+  alternates: { canonical: "/" },
 };
 
 export default function HomePage() {

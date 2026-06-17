@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Customer Reviews | PRP Services Worcestershire",
   description:
     "Read what our customers say about PRP Services property maintenance work in Worcestershire.",
+  alternates: { canonical: "/reviews" },
 };
 
 const REVIEWS = [
