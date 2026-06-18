@@ -84,7 +84,7 @@ export default function Footer() {
               <FaFacebook size={16} />
             </a>
             <a
-              href="https://www.google.com/maps"
+              href="https://share.google/788xEa5HDuKpoD359"
               target="_blank"
               rel="noopener noreferrer"
               className="social-btn"

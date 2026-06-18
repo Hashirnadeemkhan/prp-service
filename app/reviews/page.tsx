@@ -114,7 +114,7 @@ export default function ReviewsPage() {
             We&apos;d love to hear your feedback — leave us a review on Google.
           </p>
           <a
-            href="https://www.google.com/maps"
+            href="https://share.google/788xEa5HDuKpoD359"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-navy">
