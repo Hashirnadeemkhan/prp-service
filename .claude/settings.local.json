@@ -8,7 +8,9 @@
       "Bash(npx tsc *)",
       "Bash(curl -sL \"https://prp-services.uk/gallery.html\" -o gallery_ref.html)",
       "Bash(echo \"EXIT:$?\")",
-      "Bash(wc -c gallery_ref.html)"
+      "Bash(wc -c gallery_ref.html)",
+      "WebSearch",
+      "WebFetch(domain:findthatpostcode.uk)"
     ]
   }
 }

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import QuoteForm from "./QuoteForm";
+import JsonLd from "@/components/JsonLd";
+import { contactSchema } from "@/lib/structuredData";
 
 export const metadata: Metadata = {
   title: "Contact Us | PRP Services Worcestershire",
@@ -12,6 +14,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
+      <JsonLd data={contactSchema} />
       {/* Banner */}
       <section
         className="py-20 px-4 text-center"
