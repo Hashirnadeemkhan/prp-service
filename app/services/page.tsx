@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Services | PRP Services Worcestershire",
+  title: "Fencing, Roofing & Landscaping in Worcestershire | PRP Services",
   description:
-    "Explore all property maintenance services by PRP Services in Worcestershire — fencing, roofing, patios, driveways, landscaping and tree surgery.",
+    "PRP Services offers expert fencing, roofing, patios, driveways & landscaping across Worcestershire. Trusted local team get your free quote today!",
   alternates: { canonical: "/services" },
 };
 

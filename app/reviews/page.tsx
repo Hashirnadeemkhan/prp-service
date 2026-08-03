@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Customer Reviews | PRP Services Worcestershire",
   description:
-    "Read what our customers say about PRP Services property maintenance work in Worcestershire.",
+    "Read genuine customer reviews for PRP Services' fencing, roofing, patio & landscaping work across Worcestershire. Real feedback see why locals trust us!",
   alternates: { canonical: "/reviews" },
 };
 

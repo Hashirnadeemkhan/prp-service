@@ -3,9 +3,9 @@ import Link from "next/link";
 import GalleryClient from "./GalleryClient";
 
 export const metadata: Metadata = {
-  title: "Gallery | PRP Services Worcestershire",
+  title: "Project Gallery | PRP Services Worcestershire",
   description:
-    "Browse our gallery of completed fencing, driveways & patios, and roofing projects across Worcestershire. Quality property maintenance you can see.",
+    "See real fencing, roofing, patio & landscaping projects completed by PRP Services across Worcestershire. Quality you can see view our gallery today!",
   alternates: { canonical: "/gallery" },
 };
 

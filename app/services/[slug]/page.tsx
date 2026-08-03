@@ -49,9 +49,9 @@ const SERVICES: Record<
   "fencing-services": {
     name: "Fencing",
     metaTitle:
-      "Fencing Services Worcester | Fence Installation & Repair Experts | PRP Services",
+      "Fencing Installation & Repair in Worcestershire | PRP Services",
     metaDescription:
-      "Looking for fencing services in Worcester? We offer fence installation, repair, and replacement at affordable prices. Trusted local fencing contractors.",
+      "PRP Services provides durable fencing installation & repair across Worcestershire. Quality materials, expert fitting get your free quote today!",
     gradient: "linear-gradient(160deg, #1e3d1e 0%, #2d5e2d 100%)",
     description:
       "We supply and fit all types of fencing for domestic and commercial properties across Worcestershire. Whether you need a new garden fence, security fencing, or agricultural fencing, our experienced team will deliver a high-quality result that lasts.",
@@ -69,9 +69,9 @@ const SERVICES: Record<
   "roofing-services": {
     name: "Roofing & Repairs",
     metaTitle:
-      "Roofing Services Worcester | Roof Repairs & Installation Experts | PRP Services",
+      "Roofing Installation & Repairs in Worcestershire | PRP Services",
     metaDescription:
-      "Expert roofing services in Worcester including roof repairs, cleaning & installation. Fast, reliable & affordable solutions for your home or business.",
+      "PRP Services offers expert roofing installation & repairs across Worcestershire. Reliable, high-quality workmanship get your free quote today!",
     gradient: "linear-gradient(160deg, #1e1e3d 0%, #2d2d5e 100%)",
     description:
       "From emergency roof repairs to complete reroofing projects, PRP Services handles all types of residential and commercial roofing work across Worcestershire. We work quickly to protect your property and minimise disruption.",
@@ -89,9 +89,9 @@ const SERVICES: Record<
   "driveways-patios-worcester": {
     name: "Patios & Driveways",
     metaTitle:
-      "Driveways & Patio Installation Worcester | Block Paving Experts | PRP Services",
+      "Patios & Driveways Installation in Worcestershire | PRP Services",
     metaDescription:
-      "High-quality driveway and patio installation in Worcester. Block paving, resin driveways & custom patios at competitive prices.",
+      "PRP Services delivers quality patios & driveways across Worcestershire. Durable finishes & expert installation book your free consultation today, it's easy!",
     gradient: "linear-gradient(160deg, #3d2a1a 0%, #5e4a2d 100%)",
     description:
       "Transform your outdoor space with a beautiful new patio or driveway. We work with a wide range of materials including block paving, natural stone, concrete, and tarmac to create stunning, durable results that add real value to your property.",
@@ -109,9 +109,9 @@ const SERVICES: Record<
   "landscaping-services": {
     name: "Landscaping & Tree Surgery",
     metaTitle:
-      "Landscaping Services Worcester | Garden Design & Makeovers | PRP Services",
+      "Landscaping & Tree Surgery in Worcestershire | PRP Services",
     metaDescription:
-      "Transform your outdoor space with professional landscaping services in Worcester. Garden design, maintenance & complete makeovers available.",
+      "PRP Services provides professional landscaping & tree surgery across Worcestershire. Skilled team, tidy results & safe practices speak to us today!",
     gradient: "linear-gradient(160deg, #1a3d1a 0%, #2a5e2a 100%)",
     description:
       "From complete garden makeovers to professional tree surgery, our team has the skills and equipment to transform any outdoor space. We take pride in delivering beautiful, practical gardens that our customers love.",

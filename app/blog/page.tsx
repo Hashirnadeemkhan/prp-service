@@ -5,9 +5,9 @@ import { prisma } from "@/lib/prisma";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Blog | PRP Services Worcestershire",
+  title: "Worcestershire Home & Garden Blog | PRP Services",
   description:
-    "Tips, guides, and news about property maintenance, fencing, roofing, and landscaping from the PRP Services team.",
+    "Real advice on fencing, roofing, driveways & garden care from Worcestershire's PRP Services team. Practical tips from local pros browse our blog now!",
   alternates: { canonical: "/blog" },
 };
 
