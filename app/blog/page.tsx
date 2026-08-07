@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
+import JsonLd from "@/components/JsonLd";
+import { buildBlogSchema } from "@/lib/structuredData";
 
 export const dynamic = "force-dynamic";
 
@@ -36,6 +38,7 @@ export default async function BlogPage() {
 
   return (
     <>
+      <JsonLd data={buildBlogSchema(posts)} />
       {/* Banner */}
       <section
         className="py-20 px-4 text-center"

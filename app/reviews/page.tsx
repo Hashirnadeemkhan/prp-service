@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import JsonLd from "@/components/JsonLd";
+import { reviewsSchema } from "@/lib/structuredData";
 
 export const metadata: Metadata = {
   title: "Customer Reviews | PRP Services Worcestershire",
@@ -56,6 +58,7 @@ function Stars({ count }: { count: number }) {
 export default function ReviewsPage() {
   return (
     <>
+      <JsonLd data={reviewsSchema} />
       {/* Banner */}
       <section
         className="py-20 px-4 text-center"

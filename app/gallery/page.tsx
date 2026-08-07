@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import GalleryClient from "./GalleryClient";
+import JsonLd from "@/components/JsonLd";
+import { gallerySchema } from "@/lib/structuredData";
 
 export const metadata: Metadata = {
   title: "Project Gallery | PRP Services Worcestershire",
@@ -12,6 +14,7 @@ export const metadata: Metadata = {
 export default function GalleryPage() {
   return (
     <>
+      <JsonLd data={gallerySchema} />
       {/* Banner */}
       <section
         className="py-20 px-4 text-center"

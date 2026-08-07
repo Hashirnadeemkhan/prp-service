@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import JsonLd from "@/components/JsonLd";
+import { serviceSchemas } from "@/lib/structuredData";
 
 /* Hero background image per service */
 const HERO_IMAGE: Record<string, string> = {
@@ -149,9 +151,11 @@ export default function ServicePage({ params }: Props) {
   if (!service) notFound();
 
   const otherServices = Object.entries(SERVICES).filter(([slug]) => slug !== params.slug);
+  const schema = serviceSchemas[params.slug];
 
   return (
     <>
+      {schema && <JsonLd data={schema} />}
       {/* Banner */}
       <section
         className="py-24 px-4 text-center"

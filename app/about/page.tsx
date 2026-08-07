@@ -19,6 +19,8 @@ import {
   Stagger,
   StaggerItem,
 } from "@/components/animations/Motion";
+import JsonLd from "@/components/JsonLd";
+import { aboutSchema } from "@/lib/structuredData";
 
 export const metadata: Metadata = {
   title: "About Us | PRP Services Worcestershire",
@@ -97,6 +99,7 @@ const PROMISES = [
 export default function AboutPage() {
   return (
     <>
+      <JsonLd data={aboutSchema} />
       {/* ── Hero banner ──────────────────────────────────────── */}
       <section
         className="relative py-24 px-4 text-center overflow-hidden"

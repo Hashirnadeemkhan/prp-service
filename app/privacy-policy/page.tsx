@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import JsonLd from "@/components/JsonLd";
+import { privacyPolicySchema } from "@/lib/structuredData";
 
 export const metadata: Metadata = {
   title: "Privacy Policy | PRP Services",
@@ -10,6 +12,7 @@ export const metadata: Metadata = {
 export default function PrivacyPolicyPage() {
   return (
     <>
+      <JsonLd data={privacyPolicySchema} />
       <section
         className="py-20 px-4 text-center"
         style={{ background: "linear-gradient(135deg, #0d1825 0%, #1e3560 100%)" }}>
