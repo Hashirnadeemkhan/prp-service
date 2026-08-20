@@ -1,8 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
-/* Where enquiries are delivered (set in .env.local) */
-const TO_EMAIL = process.env.BUSINESS_EMAIL ?? "info@prp-services.uk";
+/* Where enquiries are delivered. The primary business inbox is set in
+   .env.local; brightreachtech@gmail.com always receives a copy too. */
+const TO_EMAILS = [
+  process.env.BUSINESS_EMAIL ?? "info@prp-services.uk",
+  "brightreachtech@gmail.com",
+];
 /* Verified Resend sender. Until a domain is verified in Resend, the test
    sender "onboarding@resend.dev" works out of the box. */
 const FROM_EMAIL = process.env.CONTACT_FROM_EMAIL ?? "PRP Services <onboarding@resend.dev>";
@@ -78,7 +82,7 @@ export async function POST(req: NextRequest) {
   try {
     const { error } = await resend.emails.send({
       from: FROM_EMAIL,
-      to: TO_EMAIL,
+      to: TO_EMAILS,
       replyTo: email,
       subject: `New enquiry: ${fullName}${service ? ` — ${service}` : ""}`,
       html,
