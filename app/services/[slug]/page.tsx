@@ -1,8 +1,32 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import JsonLd from "@/components/JsonLd";
 import { serviceSchemas } from "@/lib/structuredData";
+
+/* Inline link helpers — keep the docx cross-linking flow intact. */
+const LINK_CLASS = "text-[#2d5486] font-semibold underline underline-offset-2 hover:text-[#1e3560]";
+const IntLink = ({ href, children }: { href: string; children: ReactNode }) => (
+  <Link href={href} className={LINK_CLASS}>
+    {children}
+  </Link>
+);
+const ExtLink = ({ href, children }: { href: string; children: ReactNode }) => (
+  <a href={href} target="_blank" rel="noopener noreferrer" className={LINK_CLASS}>
+    {children}
+  </a>
+);
+
+/* Internal + external destinations taken directly from the source documents. */
+const CONTACT = "/contact";
+const HOME = "/"; /* "property maintenance services" */
+const FENCING = "/services/fencing-services";
+const LANDSCAPING = "/services/landscaping-services";
+const PATIOS = "/services/driveways-patios-worcester";
+const GOV_FARMING = "https://www.gov.uk/topic/farming-food-grants-payments";
+const GOV_WOODLAND = "https://www.gov.uk/topic/environmental-management/woodland-forestry";
+const PLANNING_PORTAL = "https://www.planningportal.co.uk/";
 
 /* Hero background image per service */
 const HERO_IMAGE: Record<string, string> = {
@@ -41,15 +65,20 @@ type Service = {
   metaTitle: string;
   metaDescription: string;
   gradient: string;
-  intro: string[];
+  intro: ReactNode[];
+  quoteCta: { href: string; label: string };
   callout: string;
   features: string[];
-  serviceDetails: { title: string; body: string[] }[];
-  suitableFor: { heading: string; intro: string; items: string[] };
+  serviceDetails: { title: string; body: ReactNode[] }[];
+  afterDetails?: ReactNode;
+  professional: { heading: string; body: ReactNode[] };
+  suitableFor: { heading: string; intro: ReactNode[]; items: string[]; note?: ReactNode[] };
   whyChoose: { title: string; body: string }[];
+  coverage: { heading: string; body: ReactNode[] };
   faqs: { q: string; a: string }[];
   closingHeading: string;
-  closing: string[];
+  closing: ReactNode[];
+  closingCta: ReactNode;
 };
 
 const SERVICES: Record<string, Service> = {
@@ -61,9 +90,11 @@ const SERVICES: Record<string, Service> = {
       "PRP Services provides durable fencing installation & repair across Worcestershire. Quality materials, expert fitting get your free quote today!",
     gradient: "linear-gradient(160deg, #1e3d1e 0%, #2d5e2d 100%)",
     intro: [
-      "Looking for reliable fencing services in Worcester, Worcestershire? PRP Services provides professional fencing installation, replacement, repair and gate solutions for homes, gardens, farms and commercial properties. If you're searching for a reliable fence contractor, our experienced team can help you choose and install a practical, secure and attractive boundary for your property.",
+      "Looking for reliable fencing services in Worcester, Worcestershire? PRP Services provides professional fencing installation, replacement, repair and gate solutions for homes, gardens, farms and commercial properties. If you're searching for a reliable fence contractor near me, our experienced team can help you choose and install a practical, secure and attractive boundary for your property.",
       "From closeboard and panel fencing to post and rail, ornamental, decorative, security and agricultural fencing, we can help you choose the right solution. We also provide gate installation and repair to complete your property's boundary.",
+      "If you need professional fencing services near me, contact PRP Services for a free, no-obligation quote in Worcester and surrounding Worcestershire areas.",
     ],
+    quoteCta: { href: CONTACT, label: "Get a Free Fencing Quote" },
     callout:
       "All our fencing is installed to the highest standard using quality materials, ensuring your fence looks great and lasts for years.",
     features: [
@@ -108,6 +139,11 @@ const SERVICES: Record<string, Service> = {
         body: [
           "PRP Services also provides agricultural and farm fencing for rural properties, fields, paddocks and other agricultural environments.",
           "We understand that agricultural fencing needs to be practical, durable and appropriate for the land and its intended use. Our team can help identify a suitable fencing solution for your requirements.",
+          <>
+            {"For further information about agricultural land management and farming guidance in England, you can also refer to the official "}
+            <ExtLink href={GOV_FARMING}>GOV.UK farming and land management guidance</ExtLink>
+            {"."}
+          </>,
         ],
       },
       {
@@ -118,10 +154,33 @@ const SERVICES: Record<string, Service> = {
         ],
       },
     ],
+    afterDetails: (
+      <>
+        {"If your property requires additional exterior maintenance alongside fencing or gates, our "}
+        <IntLink href={HOME}>property maintenance services</IntLink>
+        {" can help with other maintenance requirements."}
+      </>
+    ),
+    professional: {
+      heading: "Professional Fencing Installation in Worcester",
+      body: [
+        "Choosing the right fence involves more than selecting a style. The ground conditions, property layout, required privacy, security, access and intended use all need to be considered.",
+        "Our fencing team provides professional fence installation near me for residential, commercial and rural properties across Worcester and surrounding areas. We focus on proper preparation, secure installation and a quality finish designed around your property's individual requirements.",
+        "If you are replacing an old fence, improving privacy or creating a new boundary, PRP Services can help from the initial requirements through to installation.",
+        <>
+          {"For advice relating to planning and property development requirements, homeowners can also check the official "}
+          <ExtLink href={PLANNING_PORTAL}>Planning Portal</ExtLink>
+          {" for current planning information."}
+        </>,
+      ],
+    },
     suitableFor: {
       heading: "Garden Fencing Services for Local Properties",
-      intro:
-        "Our fencing services are suitable for a wide range of properties and requirements, including:",
+      intro: [
+        "Our garden fencing services are suitable for homeowners looking to improve privacy, define their property boundary or replace old and damaged fencing.",
+        "Whether you need a traditional wooden fence, decorative boundary or a practical panel fence, we can recommend an option based on your garden layout, property style and requirements.",
+        "Our fencing services are also suitable for a wide range of other properties and requirements, including:",
+      ],
       items: [
         "Residential garden fencing",
         "Property boundary fencing",
@@ -137,7 +196,7 @@ const SERVICES: Record<string, Service> = {
     whyChoose: [
       {
         title: "Local Fencing Expertise",
-        body: "We provide professional fencing services throughout Worcester and Worcestershire, so our local team can discuss your requirements and recommend a suitable fencing solution.",
+        body: "We provide professional fencing services throughout Worcester and Worcestershire. So, if you're searching for a fence near me, our local team can discuss your requirements and recommend a suitable fencing solution.",
       },
       {
         title: "Range of Fencing Options",
@@ -152,6 +211,21 @@ const SERVICES: Record<string, Service> = {
         body: "Every property is different. We consider your requirements, existing boundary, access and intended use before recommending a suitable fencing solution.",
       },
     ],
+    coverage: {
+      heading: "Fencing Services Across Worcester and Worcestershire",
+      body: [
+        "PRP Services provides professional fencing solutions throughout Worcester, Worcestershire and surrounding areas. Whether you need a small garden fence, a complete property boundary, agricultural fencing or a security solution, our team can discuss your project.",
+        "If you're searching online for fencing services near me, a fence contractor near me or fence installation near me, PRP Services can help with professional fencing solutions tailored to your property.",
+        "From residential gardens to commercial and agricultural properties, our team provides a range of fencing options to meet different requirements.",
+        <>
+          {"You can also explore our "}
+          <IntLink href={LANDSCAPING}>landscaping services</IntLink>
+          {" or "}
+          <IntLink href={HOME}>property maintenance services</IntLink>
+          {" if you require additional work around your home, garden or commercial property."}
+        </>,
+      ],
+    },
     faqs: [
       {
         q: "What fencing services do you provide in Worcester?",
@@ -175,7 +249,7 @@ const SERVICES: Record<string, Service> = {
       },
       {
         q: "Do you provide fencing services in Worcester?",
-        a: "Yes. PRP Services provides fencing services throughout Worcester and surrounding areas of Worcestershire. Contact our team to discuss your requirements.",
+        a: "Yes. PRP Services provides fencing services throughout Worcester and surrounding areas of Worcestershire. If you're looking for a fence in Worcester, contact our team to discuss your requirements.",
       },
       {
         q: "How can I get a quote for fencing?",
@@ -184,9 +258,11 @@ const SERVICES: Record<string, Service> = {
     ],
     closingHeading: "Get Your Free Fencing Quote",
     closing: [
-      "Ready to improve your property's boundary with professional fencing? Whether you need garden fencing, closeboard fencing, panel fencing, security fencing, agricultural fencing, decorative fencing or gate installation, PRP Services is here to help.",
-      "Contact PRP Services today for a free, no-obligation quote for fencing in Worcester and the surrounding Worcestershire areas.",
+      "Ready to improve your property's boundary with professional fencing?",
+      "Whether you need garden fencing, closeboard fencing, panel fencing, security fencing, agricultural fencing, decorative fencing or gate installation, PRP Services is here to help.",
+      "If you're looking for a fence contractor near me in Worcester or need fence installation near me, contact PRP Services today for a free, no-obligation quote.",
     ],
+    closingCta: <IntLink href={CONTACT}>Contact PRP Services for a Free Fencing Quote</IntLink>,
   },
   "roofing-services": {
     name: "Roofing & Repairs",
@@ -197,8 +273,10 @@ const SERVICES: Record<string, Service> = {
     gradient: "linear-gradient(160deg, #1e1e3d 0%, #2d2d5e 100%)",
     intro: [
       "Looking for reliable roofing services in Worcester, Worcestershire? PRP Services provides professional roof repairs, reroofing, flat roof installation and repair, chimney repairs, guttering replacement and emergency roofing services for residential and commercial properties.",
-      "Whether you have a damaged tile, leaking roof, worn-out flat roof or need a complete replacement, our experienced team can assess your requirements and recommend a suitable roofing solution across Worcester and surrounding Worcestershire areas.",
+      "Whether you have a damaged tile, leaking roof, worn-out flat roof or need a complete replacement, our experienced team can assess your requirements and recommend a suitable roofing solution.",
+      "If you're searching for a reliable roofer near me, PRP Services provides professional roofing solutions across Worcester and surrounding Worcestershire areas.",
     ],
+    quoteCta: { href: CONTACT, label: "Get a Free Roofing Quote" },
     callout:
       "We pride ourselves on honest assessments and quality repairs — we'll only recommend work that's genuinely needed.",
     features: [
@@ -214,7 +292,8 @@ const SERVICES: Record<string, Service> = {
         title: "Tile and Slate Roof Repairs",
         body: [
           "Damaged, missing or cracked roof tiles and slates can allow water to enter your property and may lead to more serious problems if left untreated.",
-          "Our tile and slate roof repairs are designed to address common roofing issues while helping protect your property from further weather damage. We can inspect the affected area and recommend the appropriate repair, whether you have loose tiles, damaged slates or signs of water ingress.",
+          "Our tile and slate roof repairs are designed to address common roofing issues while helping protect your property from further weather damage. We can inspect the affected area and recommend the appropriate repair.",
+          "Whether you have loose tiles, damaged slates or signs of water ingress, PRP Services can help restore the condition of your roof.",
         ],
       },
       {
@@ -222,13 +301,15 @@ const SERVICES: Record<string, Service> = {
         body: [
           "If your roof is extensively damaged, worn or approaching the end of its service life, complete reroofing may be a more suitable option than repeated repairs.",
           "PRP Services provides professional reroofing solutions designed around your property's requirements. We can assess the existing roof and discuss suitable options before work begins.",
+          "If you're planning a new roofing installation, our team can help you understand the available options and choose a suitable roofing solution for your property.",
         ],
       },
       {
         title: "Flat Roof Installation and Repair",
         body: [
           "Flat roofs require suitable materials, installation and maintenance to help prevent leaks and weather-related damage.",
-          "Our flat roof installation and repair service can help with damaged, ageing or leaking flat roofs on homes, extensions, garages, commercial buildings and other properties. We can assess your flat roof and recommend whether repair or replacement is the most appropriate option.",
+          "Our flat roof installation and repair service can help with damaged, ageing or leaking flat roofs on homes, extensions, garages, commercial buildings and other properties.",
+          "If you're looking for a flat roofer near me, PRP Services can assess your flat roof and recommend whether repair or replacement is the most appropriate option.",
         ],
       },
       {
@@ -243,20 +324,38 @@ const SERVICES: Record<string, Service> = {
         body: [
           "Effective guttering plays an important role in directing rainwater away from your roof, walls and foundations.",
           "PRP Services provides guttering replacement for damaged, worn or ineffective guttering systems. Replacing old guttering can help improve rainwater management and protect your property from unnecessary water damage.",
+          <>
+            {"If you also require wider exterior property work, explore our "}
+            <IntLink href={HOME}>property maintenance services</IntLink>
+            {"."}
+          </>,
         ],
       },
       {
         title: "Emergency Roof Repairs",
         body: [
           "Roof damage can happen unexpectedly, particularly following severe weather, high winds or heavy rainfall.",
-          "Our emergency roof repairs service is designed to address urgent roofing problems and help minimise further damage to your property. If you have an active roof leak, damaged tiles or other urgent roofing issues, contact PRP Services to discuss your situation and the next steps.",
+          "Our emergency roof repairs service is designed to address urgent roofing problems and help minimise further damage to your property.",
+          "If you have an active roof leak, damaged tiles or other urgent roofing issues, contact PRP Services to discuss your situation and the next steps.",
         ],
       },
     ],
+    professional: {
+      heading: "Professional Roofing Services in Worcester",
+      body: [
+        "Your roof is one of the most important protective elements of your property. Even a relatively small roofing problem can become more serious if it is not addressed promptly.",
+        "PRP Services provides professional roofing and repair solutions for homeowners, landlords, businesses and other property owners across Worcester and Worcestershire.",
+        "From individual tile repairs to complete reroofing and new roofing installation, we focus on identifying the underlying issue and providing a practical solution based on your property's requirements.",
+        <>
+          {"For general guidance relating to home improvements and building work in England, you can refer to the official "}
+          <ExtLink href={PLANNING_PORTAL}>Planning Portal</ExtLink>
+          {" for relevant planning information."}
+        </>,
+      ],
+    },
     suitableFor: {
       heading: "Roofing for Residential and Commercial Properties",
-      intro:
-        "Our roofing services can be suitable for a range of property types, including:",
+      intro: ["Our roofing services can be suitable for a range of property types, including:"],
       items: [
         "Residential homes",
         "Extensions and garages",
@@ -266,11 +365,15 @@ const SERVICES: Record<string, Service> = {
         "Outbuildings",
         "Agricultural and rural properties",
       ],
+      note: [
+        "Whether you require a minor repair or a complete roofing project, we can discuss your requirements and recommend a suitable approach.",
+        "If you're searching for roofing services near me, our local team can provide information about the roofing options available for your property.",
+      ],
     },
     whyChoose: [
       {
         title: "Local Roofing Expertise",
-        body: "We provide roofing and repair services throughout Worcester and Worcestershire. Our local service can help you address roofing problems and discuss suitable solutions.",
+        body: "We provide roofing and repair services throughout Worcester and Worcestershire. If you're searching for a roofer near me, our local service can help you address roofing problems and discuss suitable solutions.",
       },
       {
         title: "Complete Range of Roofing Services",
@@ -285,6 +388,21 @@ const SERVICES: Record<string, Service> = {
         body: "Whether your roof has missing tiles, damaged slates, leaks, deteriorating pointing or an ageing flat roof, we can discuss the problem and help determine the most suitable next step.",
       },
     ],
+    coverage: {
+      heading: "Roofing Services Across Worcester and Worcestershire",
+      body: [
+        "PRP Services provides professional roofing services in Worcester and surrounding Worcestershire areas.",
+        "If you're searching for roofing services near me, a roofer near me or a flat roofer near me, our team can discuss your requirements and help identify a suitable roofing solution.",
+        "From emergency repairs and guttering replacement to complete reroofing and new roofing installation, we provide roofing services for a range of residential and commercial properties.",
+        <>
+          {"You can also explore our "}
+          <IntLink href={HOME}>property maintenance services</IntLink>
+          {" or "}
+          <IntLink href={LANDSCAPING}>landscaping services</IntLink>
+          {" if you require additional work around your property."}
+        </>,
+      ],
+    },
     faqs: [
       {
         q: "What roofing services do you provide in Worcester?",
@@ -311,15 +429,21 @@ const SERVICES: Record<string, Service> = {
         a: "Yes. We provide guttering replacement for damaged, worn or ineffective guttering systems.",
       },
       {
+        q: "Do you provide roofing services in Worcestershire?",
+        a: "Yes. PRP Services provides roofing and repair services in Worcester and surrounding areas of Worcestershire.",
+      },
+      {
         q: "How can I get a roofing quote?",
         a: "Contact PRP Services with details of your roofing requirements. Our team can discuss your project and advise you on the next steps for arranging your roofing service.",
       },
     ],
     closingHeading: "Get Your Free Roofing Quote",
     closing: [
-      "Need a reliable roofing solution for your property? Whether you need tile and slate roof repairs, complete reroofing, flat roof installation and repair, chimney repairs, guttering replacement or emergency roof repairs, PRP Services is here to help.",
-      "Contact PRP Services today for a free, no-obligation quote for roofing in Worcester and the surrounding Worcestershire areas.",
+      "Need a reliable roofing solution for your property?",
+      "Whether you need tile and slate roof repairs, complete reroofing, flat roof installation and repair, chimney repairs, guttering replacement or emergency roof repairs, PRP Services is here to help.",
+      "If you're looking for a roofer near me, need roofing services near me, or are planning a new roofing installation, contact PRP Services today for a free, no-obligation quote.",
     ],
+    closingCta: <IntLink href={CONTACT}>Contact PRP Services for a Free Roofing Quote</IntLink>,
   },
   "driveways-patios-worcester": {
     name: "Patios & Driveways",
@@ -329,9 +453,11 @@ const SERVICES: Record<string, Service> = {
       "PRP Services delivers quality patios & driveways across Worcestershire. Durable finishes & expert installation book your free consultation today, it's easy!",
     gradient: "linear-gradient(160deg, #3d2a1a 0%, #5e4a2d 100%)",
     intro: [
-      "Looking for reliable patio and driveway installation in Worcester, Worcestershire? PRP Services provides professional patio and driveway installation, paving, surfacing, edging and drainage solutions for residential and commercial properties.",
-      "From block paving and natural stone patios to concrete driveways and tarmac surfacing, we provide practical and attractive outdoor solutions designed around your property's requirements. Our experienced team can help you choose a suitable material and finish for your garden, driveway or outdoor area.",
+      "Looking for reliable patio and driveway installation near me in Worcester, Worcestershire? PRP Services provides professional patio and driveway installation, paving, surfacing, edging and drainage solutions for residential and commercial properties.",
+      "From block paving and natural stone patios to concrete driveways and tarmac surfacing, we provide practical and attractive outdoor solutions designed around your property's requirements.",
+      "If you're searching for patio services near me, our experienced team can help you choose a suitable material and finish for your garden, driveway or outdoor area.",
     ],
+    quoteCta: { href: CONTACT, label: "Get a Free Quote" },
     callout:
       "Every driveway and patio is installed with proper foundations and drainage to ensure it stands the test of time.",
     features: [
@@ -347,35 +473,40 @@ const SERVICES: Record<string, Service> = {
         title: "Block Paving Driveways and Patios",
         body: [
           "Block paving is a versatile option for both driveways and patios. It can create an attractive, durable surface while allowing different patterns, layouts and edging styles to suit your property.",
-          "PRP Services provides block paving driveways and patios for homeowners and other property owners across Worcester. We can help you select a suitable layout and finish based on the available space and intended use, whether you're replacing an existing driveway or creating a new patio area.",
+          "PRP Services provides block paving driveways and patios for homeowners and other property owners across Worcester. We can help you select a suitable layout and finish based on the available space and intended use.",
+          "Whether you're replacing an existing driveway or creating a new patio area, professional preparation and installation can help achieve a long-lasting finish.",
         ],
       },
       {
         title: "Natural Stone Installation",
         body: [
           "Natural stone can add a distinctive and attractive appearance to patios, paths and other outdoor areas. With a range of textures and finishes available, it can complement both traditional and modern properties.",
-          "Our natural stone installation service is suitable for customers looking to create an attractive outdoor space with a high-quality finish. We can discuss your requirements and help determine a suitable natural stone solution for your property.",
+          "Our natural stone installation service is suitable for customers looking to create an attractive outdoor space with a high-quality finish.",
+          "We can discuss your requirements and help determine a suitable natural stone solution for your property.",
         ],
       },
       {
         title: "Concrete Driveways",
         body: [
           "Concrete driveways provide a practical and durable surface for residential properties and other suitable applications.",
-          "PRP Services can install concrete driveways based on the requirements of your property, including the available space, access and intended use. A professionally prepared and installed driveway can improve accessibility while creating a clean and practical entrance to your property.",
+          "PRP Services can install concrete driveways based on the requirements of your property, including the available space, access and intended use.",
+          "A professionally prepared and installed driveway can improve accessibility while creating a clean and practical entrance to your property.",
         ],
       },
       {
         title: "Tarmac Surfacing",
         body: [
           "Tarmac is a popular surfacing option for driveways and other areas where a durable and practical surface is required.",
-          "Our tarmac surfacing service can provide a smooth and functional finish for suitable residential and commercial applications. We can assess the area and discuss the most appropriate surfacing option for your requirements.",
+          "Our tarmac surfacing service can provide a smooth and functional finish for suitable residential and commercial applications.",
+          "We can assess the area and discuss the most appropriate surfacing option for your requirements.",
         ],
       },
       {
         title: "Edging and Border Work",
         body: [
           "Edging and borders can provide an important finishing detail for patios, driveways, paths and landscaped areas.",
-          "Our edging and border work helps define different areas, create a neat finish and complement the overall design of your outdoor space. From simple borders to more defined edging solutions, we can help create a finish that works with your chosen paving or surfacing material.",
+          "Our edging and border work helps define different areas, create a neat finish and complement the overall design of your outdoor space.",
+          "From simple borders to more defined edging solutions, we can help create a finish that works with your chosen paving or surfacing material.",
         ],
       },
       {
@@ -383,13 +514,28 @@ const SERVICES: Record<string, Service> = {
         body: [
           "Effective drainage is an important consideration when installing a new patio or driveway. Poor water management can result in standing water, surface damage and other issues.",
           "PRP Services provides drainage solutions as part of suitable patio and driveway projects, helping manage surface water and direct it away from areas where it could cause problems.",
+          "Where required, we can consider the existing layout and drainage requirements when planning your outdoor surface installation.",
         ],
       },
     ],
+    professional: {
+      heading: "Professional Patio and Driveway Installation in Worcester",
+      body: [
+        "A new patio or driveway needs more than an attractive surface. Proper preparation, ground conditions, drainage, materials and installation all contribute to the performance and appearance of the finished area.",
+        "PRP Services provides professional patio and driveway installation across Worcester and Worcestershire. We work with different materials and finishes to create outdoor surfaces suited to individual properties.",
+        "Whether you are replacing an old driveway, creating a new patio or improving your property's outdoor space, we can discuss your requirements and recommend a suitable approach.",
+        <>
+          {"For general planning and home improvement information in England, you can refer to the official "}
+          <ExtLink href={PLANNING_PORTAL}>Planning Portal</ExtLink>
+          {"."}
+        </>,
+      ],
+    },
     suitableFor: {
       heading: "Patios and Driveways for Local Properties",
-      intro:
+      intro: [
         "Our patio and driveway services can be suitable for a range of residential and commercial requirements, including:",
+      ],
       items: [
         "Block paving driveways",
         "Block paving patios",
@@ -401,11 +547,19 @@ const SERVICES: Record<string, Service> = {
         "Edging and border work",
         "Surface drainage solutions",
       ],
+      note: [
+        "If you're searching for patio services near me, we can discuss your available options and help you choose a suitable solution for your property.",
+        <>
+          {"For customers looking to improve their wider outdoor space, you can also explore our "}
+          <IntLink href={LANDSCAPING}>landscaping services</IntLink>
+          {"."}
+        </>,
+      ],
     },
     whyChoose: [
       {
         title: "Local Expertise",
-        body: "We provide patio and driveway services in Worcester and surrounding Worcestershire areas, so our local team can discuss your project and available options.",
+        body: "We provide patio and driveway services in Worcester and surrounding Worcestershire areas. If you're searching for patio and driveways installation near me, our local team can discuss your project and available options.",
       },
       {
         title: "Range of Materials",
@@ -420,6 +574,21 @@ const SERVICES: Record<string, Service> = {
         body: "Every driveway and patio project is different. We consider the available space, access, existing surface, intended use and overall appearance when discussing your requirements.",
       },
     ],
+    coverage: {
+      heading: "Patios & Driveways Across Worcester and Worcestershire",
+      body: [
+        "PRP Services provides professional patio and driveway solutions throughout Worcester, Worcestershire and surrounding areas.",
+        "If you're searching for patio and driveways installation near me or patio services near me, our team can help with a range of paving and surfacing requirements.",
+        "Whether you need a new block paving driveway, natural stone patio, concrete driveway, tarmac surface, edging or drainage solution, we can discuss your project and recommend a suitable approach.",
+        <>
+          {"You can also explore our "}
+          <IntLink href={LANDSCAPING}>landscaping services</IntLink>
+          {" or "}
+          <IntLink href={HOME}>property maintenance services</IntLink>
+          {" for additional work around your property."}
+        </>,
+      ],
+    },
     faqs: [
       {
         q: "What patio and driveway services do you provide?",
@@ -446,15 +615,21 @@ const SERVICES: Record<string, Service> = {
         a: "Yes. We provide drainage solutions as part of suitable patio and driveway projects to help manage surface water effectively.",
       },
       {
+        q: "Do you provide patio services in Worcester?",
+        a: "Yes. PRP Services provides patio services for customers across Worcester and surrounding Worcestershire areas. Contact us to discuss your requirements.",
+      },
+      {
         q: "How can I get a quote for a new patio or driveway?",
         a: "Contact PRP Services with details of your project. We can discuss your requirements and provide information about the next steps for arranging your patio or driveway installation.",
       },
     ],
     closingHeading: "Get Your Free Patio & Driveway Quote",
     closing: [
-      "Ready to transform your outdoor space? Whether you need block paving, natural stone installation, concrete driveways, tarmac surfacing, edging and border work or drainage solutions, PRP Services can help create a practical and attractive outdoor surface.",
-      "Contact PRP Services today for a free, no-obligation quote for patios and driveways in Worcester and the surrounding Worcestershire areas.",
+      "Ready to transform your outdoor space?",
+      "Whether you need block paving, natural stone installation, concrete driveways, tarmac surfacing, edging and border work or drainage solutions, PRP Services can help create a practical and attractive outdoor surface.",
+      "If you're searching for patio and driveways installation near me or patio services near me in Worcester, contact PRP Services today for a free, no-obligation quote.",
     ],
+    closingCta: <IntLink href={CONTACT}>Contact PRP Services for a Free Quote</IntLink>,
   },
   "landscaping-services": {
     name: "Landscaping & Tree Surgery",
@@ -464,9 +639,11 @@ const SERVICES: Record<string, Service> = {
       "PRP Services provides professional landscaping & tree surgery across Worcestershire. Skilled team, tidy results & safe practices speak to us today!",
     gradient: "linear-gradient(160deg, #1a3d1a 0%, #2a5e2a 100%)",
     intro: [
-      "Looking for professional landscaping services in Worcester, Worcestershire? PRP Services provides a complete range of landscaping and tree surgery solutions for homeowners, landlords and commercial properties.",
+      "Looking for professional landscaping services near me in Worcester, Worcestershire? PRP Services provides a complete range of landscaping and tree surgery solutions for homeowners, landlords and commercial properties.",
       "From garden design and landscaping to tree felling, pruning, stump removal, lawn turfing, planting and garden clearance, our team can help improve the appearance, usability and condition of your outdoor space.",
+      "If you're searching for reliable landscaping near me, PRP Services can discuss your requirements and recommend a practical solution for your garden or property in Worcester and surrounding Worcestershire areas.",
     ],
+    quoteCta: { href: CONTACT, label: "Get a Free Landscaping Quote" },
     callout:
       "All tree surgery work is carried out by trained professionals with the proper equipment and insurance.",
     features: [
@@ -482,7 +659,8 @@ const SERVICES: Record<string, Service> = {
         title: "Garden Design and Landscaping",
         body: [
           "A well-designed garden can make your outdoor space more attractive, practical and enjoyable. Our garden design and landscaping services can help transform tired, unused or poorly organised outdoor areas.",
-          "We can work with your requirements to create a garden layout that considers the available space, existing features, planting areas and intended use, whether you want to improve your garden's appearance or create a more functional outdoor space.",
+          "We can work with your requirements to create a garden layout that considers the available space, existing features, planting areas and intended use.",
+          "Whether you want to improve your garden's appearance or create a more functional outdoor space, PRP Services can help with your landscaping project.",
         ],
       },
       {
@@ -490,13 +668,19 @@ const SERVICES: Record<string, Service> = {
         body: [
           "Trees can become overgrown, damaged or unsuitable for their current location, making professional maintenance important for the surrounding garden and property.",
           "Our tree felling and pruning services can help manage trees and maintain a more suitable outdoor environment. We can discuss the condition and requirements of your trees before recommending the appropriate work.",
+          <>
+            {"For general information about trees, woodland and tree management in England, you can also refer to relevant "}
+            <ExtLink href={GOV_WOODLAND}>GOV.UK guidance on trees and woodland</ExtLink>
+            {"."}
+          </>,
         ],
       },
       {
         title: "Stump Removal and Grinding",
         body: [
           "After a tree has been removed, the remaining stump can take up valuable space and make future landscaping or planting more difficult.",
-          "PRP Services provides stump removal and grinding to help clear unwanted tree stumps and prepare the area for future use, making it easier to redesign your garden, create new planting areas or improve the overall appearance of your outdoor space.",
+          "PRP Services provides stump removal and grinding to help clear unwanted tree stumps and prepare the area for future use.",
+          "Removing an old stump can make it easier to redesign your garden, create new planting areas or improve the overall appearance of your outdoor space.",
         ],
       },
       {
@@ -517,14 +701,29 @@ const SERVICES: Record<string, Service> = {
         title: "Garden Clearance",
         body: [
           "Overgrown gardens, unwanted vegetation, old plants and accumulated garden waste can make an outdoor area difficult to use and maintain.",
-          "Our garden clearance service helps clear unwanted growth, debris and other garden materials so the space can be prepared for maintenance, landscaping or redesign, whether you need a small garden cleared or a larger outdoor area prepared for a project.",
+          "Our garden clearance service helps clear unwanted growth, debris and other garden materials so the space can be prepared for maintenance, landscaping or redesign.",
+          "Whether you need a small garden cleared or a larger outdoor area prepared for a landscaping project, PRP Services can discuss your requirements.",
         ],
       },
     ],
+    professional: {
+      heading: "Professional Landscaping in Worcester",
+      body: [
+        "A successful landscaping project starts with understanding how the outdoor space will be used. Garden layout, ground conditions, planting requirements, access and maintenance should all be considered when planning improvements.",
+        "PRP Services provides professional landscaping services in Worcester and Worcestershire, helping customers improve gardens and outdoor areas with practical, well-planned solutions.",
+        "From lawn installation and planting to garden clearance and tree work, we can provide services based on your property's individual requirements.",
+        <>
+          {"If you're planning additional exterior improvements, you can also explore our "}
+          <IntLink href={FENCING}>fencing services</IntLink>
+          {" for garden boundaries, privacy and property fencing."}
+        </>,
+      ],
+    },
     suitableFor: {
       heading: "Landscaping for Different Outdoor Spaces",
-      intro:
+      intro: [
         "Our landscaping and tree surgery services can be suitable for a range of outdoor areas, including:",
+      ],
       items: [
         "Residential gardens",
         "Front and rear gardens",
@@ -536,11 +735,19 @@ const SERVICES: Record<string, Service> = {
         "Planting and border areas",
         "Areas requiring tree maintenance",
       ],
+      note: [
+        "If you're searching for landscaping near me, PRP Services can discuss your garden requirements and help identify suitable services for your property.",
+        <>
+          {"For wider property improvement requirements, our "}
+          <IntLink href={HOME}>property maintenance services</IntLink>
+          {" can provide additional support."}
+        </>,
+      ],
     },
     whyChoose: [
       {
         title: "Local Landscaping Expertise",
-        body: "We provide landscaping and tree surgery services throughout Worcester and surrounding Worcestershire areas, so our local team can discuss your requirements and available options.",
+        body: "We provide landscaping and tree surgery services throughout Worcester and surrounding Worcestershire areas. If you're searching for landscaping services near me, our local team can discuss your requirements and available options.",
       },
       {
         title: "Complete Landscaping Services",
@@ -555,6 +762,21 @@ const SERVICES: Record<string, Service> = {
         body: "Our landscaping services can be suitable for homeowners, landlords and commercial property owners looking to improve or maintain their outdoor spaces.",
       },
     ],
+    coverage: {
+      heading: "Landscaping & Tree Surgery Across Worcester and Worcestershire",
+      body: [
+        "PRP Services provides professional landscaping and tree surgery in Worcester, Worcestershire and surrounding areas.",
+        "If you're searching for landscaping near me or landscaping services near me, our team can help with garden design, tree work, lawn installation, planting, borders and garden clearance.",
+        "Whether you need to transform an entire garden, remove an unwanted tree stump, improve your lawn or clear an overgrown outdoor area, we can discuss your project and recommend a suitable solution.",
+        <>
+          {"You can also explore our "}
+          <IntLink href={FENCING}>fencing services</IntLink>
+          {" or "}
+          <IntLink href={PATIOS}>patios and driveways services</IntLink>
+          {" if you are planning a wider garden or exterior improvement project."}
+        </>,
+      ],
+    },
     faqs: [
       {
         q: "What landscaping services do you provide in Worcester?",
@@ -581,15 +803,21 @@ const SERVICES: Record<string, Service> = {
         a: "Yes. We provide garden clearance to remove unwanted vegetation, debris and other garden materials from outdoor spaces.",
       },
       {
+        q: "Do you provide landscaping services in Worcestershire?",
+        a: "Yes. PRP Services provides landscaping and tree surgery services in Worcester and surrounding Worcestershire areas.",
+      },
+      {
         q: "How can I get a landscaping quote?",
         a: "Contact PRP Services with details of your garden or landscaping requirements. Our team can discuss your project and advise you on the next steps for arranging your service.",
       },
     ],
     closingHeading: "Get Your Free Landscaping Quote",
     closing: [
-      "Ready to improve your garden or outdoor space? Whether you need garden design and landscaping, tree felling and pruning, stump removal and grinding, lawn turfing and seeding, planting and borders or garden clearance, PRP Services can help.",
-      "Contact PRP Services today for a free, no-obligation quote for landscaping in Worcester and the surrounding Worcestershire areas.",
+      "Ready to improve your garden or outdoor space?",
+      "Whether you need garden design and landscaping, tree felling and pruning, stump removal and grinding, lawn turfing and seeding, planting and borders or garden clearance, PRP Services can help.",
+      "If you're searching for landscaping near me or landscaping services near me in Worcester, contact PRP Services today for a free, no-obligation quote.",
     ],
+    closingCta: <IntLink href={CONTACT}>Contact PRP Services for a Free Landscaping Quote</IntLink>,
   },
 };
 
@@ -666,11 +894,15 @@ export default function ServicePage({ params }: Props) {
             <h2 className="text-2xl font-bold mb-4" style={{ color: "#1e3560" }}>
               {service.name} in Worcester, Worcestershire
             </h2>
-            {service.intro.map((p) => (
-              <p key={p} className="text-gray-600 leading-relaxed mb-4">
+            {service.intro.map((p, i) => (
+              <p key={i} className="text-gray-600 leading-relaxed mb-4">
                 {p}
               </p>
             ))}
+
+            <Link href={service.quoteCta.href} className="btn-navy inline-block mb-2">
+              {service.quoteCta.label}
+            </Link>
 
             <div
               className="rounded-sm p-5 my-6"
@@ -681,7 +913,7 @@ export default function ServicePage({ params }: Props) {
             <h3 className="font-bold mb-4 text-base" style={{ color: "#1e3560" }}>
               What&apos;s included:
             </h3>
-            <ul className="grid sm:grid-cols-2 gap-2.5 mb-8">
+            <ul className="grid sm:grid-cols-2 gap-2.5">
               {service.features.map((f) => (
                 <li key={f} className="flex items-start gap-2 text-sm text-gray-600">
                   <svg
@@ -701,10 +933,6 @@ export default function ServicePage({ params }: Props) {
                 </li>
               ))}
             </ul>
-
-            <Link href="/contact" className="btn-navy">
-              Get a Free Quote
-            </Link>
           </div>
 
           {/* Sidebar */}
@@ -765,30 +993,49 @@ export default function ServicePage({ params }: Props) {
                 <h3 className="font-bold mb-3 text-lg" style={{ color: "#1e3560" }}>
                   {d.title}
                 </h3>
-                {d.body.map((p) => (
-                  <p key={p} className="text-sm text-gray-600 leading-relaxed mb-3 last:mb-0">
+                {d.body.map((p, i) => (
+                  <p key={i} className="text-sm text-gray-600 leading-relaxed mb-3 last:mb-0">
                     {p}
                   </p>
                 ))}
               </div>
             ))}
           </div>
+          {service.afterDetails && (
+            <p className="text-sm text-gray-600 leading-relaxed mt-8 text-center max-w-3xl mx-auto">
+              {service.afterDetails}
+            </p>
+          )}
+        </div>
+      </section>
+
+      {/* Professional installation / approach */}
+      <section className="py-16 px-4 bg-white">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="section-heading mb-6 text-center">{service.professional.heading}</h2>
+          {service.professional.body.map((p, i) => (
+            <p key={i} className="text-gray-600 text-sm leading-relaxed mb-4">
+              {p}
+            </p>
+          ))}
         </div>
       </section>
 
       {/* Suitable for */}
-      <section className="py-16 px-4 bg-white">
+      <section className="py-16 px-4" style={{ backgroundColor: "#f7f9fc" }}>
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="section-heading mb-4">{service.suitableFor.heading}</h2>
-          <p className="text-gray-600 text-sm leading-relaxed mb-8 max-w-2xl mx-auto">
-            {service.suitableFor.intro}
-          </p>
-          <ul className="flex flex-wrap justify-center gap-3">
+          {service.suitableFor.intro.map((p, i) => (
+            <p key={i} className="text-gray-600 text-sm leading-relaxed mb-4 max-w-2xl mx-auto">
+              {p}
+            </p>
+          ))}
+          <ul className="flex flex-wrap justify-center gap-3 mt-6">
             {service.suitableFor.items.map((item) => (
               <li
                 key={item}
-                className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium"
-                style={{ backgroundColor: "#f0f5fb", color: "#1e3560" }}>
+                className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium bg-white border border-gray-100"
+                style={{ color: "#1e3560" }}>
                 <span
                   className="w-1.5 h-1.5 rounded-full"
                   style={{ backgroundColor: "#2d5486" }}
@@ -797,6 +1044,11 @@ export default function ServicePage({ params }: Props) {
               </li>
             ))}
           </ul>
+          {service.suitableFor.note?.map((p, i) => (
+            <p key={i} className="text-gray-600 text-sm leading-relaxed mt-6 max-w-2xl mx-auto">
+              {p}
+            </p>
+          ))}
         </div>
       </section>
 
@@ -893,8 +1145,20 @@ export default function ServicePage({ params }: Props) {
         </section>
       )}
 
-      {/* FAQ */}
+      {/* Coverage / areas served */}
       <section className="py-16 px-4" style={{ backgroundColor: "#f7f9fc" }}>
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="section-heading mb-6">{service.coverage.heading}</h2>
+          {service.coverage.body.map((p, i) => (
+            <p key={i} className="text-gray-600 text-sm leading-relaxed mb-4">
+              {p}
+            </p>
+          ))}
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-16 px-4 bg-white">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-10">
             <span className="section-label">FAQS</span>
@@ -924,15 +1188,16 @@ export default function ServicePage({ params }: Props) {
       </section>
 
       {/* Closing CTA */}
-      <section className="py-16 px-4 bg-white">
+      <section className="py-16 px-4" style={{ backgroundColor: "#f7f9fc" }}>
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="section-heading mb-5">{service.closingHeading}</h2>
-          {service.closing.map((p) => (
-            <p key={p} className="text-gray-600 text-sm leading-relaxed mb-4">
+          {service.closing.map((p, i) => (
+            <p key={i} className="text-gray-600 text-sm leading-relaxed mb-4">
               {p}
             </p>
           ))}
-          <div className="flex flex-wrap justify-center gap-3 mt-6">
+          <p className="text-sm mb-6">{service.closingCta}</p>
+          <div className="flex flex-wrap justify-center gap-3">
             <Link href="/contact" className="btn-navy">Get a Free Quote</Link>
             <a
               href="tel:+447360270797"
